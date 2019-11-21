@@ -20,7 +20,6 @@ class AskUserUseCaseImplementation(
     private val questionsDao: QuestionsDao
 ) : AskUserUseCase {
     override suspend fun askQuestion(): Question {
-        val allDefinitions = questionsDao.getAllDefinitions() //TODO: remove me, I'm just a check
         return Question(
             id = 1,
             question = "2 x 2 = ?",
