@@ -9,15 +9,23 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
     private val _state: MutableLiveData<ScreenState> = MutableLiveData()
     val state: LiveData<ScreenState> get() = _state
 
+    private var currentState: ScreenState.QuestionState? = null
+
+
+
     init {
         viewModelScope.launch {
-            _state.value = ScreenState.QuestionState(askUserUseCase.askQuestion())
+            val state = ScreenState.QuestionState(askUserUseCase.askQuestion())
+            _state.value = state
+            currentState = state
         }
     }
 
-    fun onAnswerClick(answerId: Long) {
+    fun onAnswerClick(answerPos: Int) {
         viewModelScope.launch {
-            _state.value = ScreenState.Result(askUserUseCase.checkAnswer(answerId))
+            if (currentState != null && currentState!!.question.answers.size > answerPos) {
+                _state.value = ScreenState.Result(askUserUseCase.checkAnswer(currentState!!.question.correctAnswerId == currentState!!.question.answers[answerPos].id))
+            }
         }
 
 
@@ -25,7 +33,10 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 
     fun onNextClick() {
         viewModelScope.launch {
-            _state.value = ScreenState.QuestionState(askUserUseCase.askQuestion())
+            val state = ScreenState.QuestionState(askUserUseCase.askQuestion())
+            _state.value = state
+            currentState = state
+
         }
     }
 }
@@ -34,7 +45,7 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 sealed class ScreenState() {
     data class QuestionState(val question: Question): ScreenState()
 
-    class Result(val result: String): ScreenState(){
+    class Result(val isRight: Boolean): ScreenState(){
 
     }
 

@@ -14,7 +14,7 @@ data class Answer(
 
 interface AskUserUseCase {
     suspend fun askQuestion(): Question
-    suspend fun checkAnswer(answerId: Long): String
+    suspend fun checkAnswer(isAnswerRight: Boolean): Boolean
 }
 
 class AskUserUseCaseImplementation(
@@ -33,7 +33,7 @@ class AskUserUseCaseImplementation(
         )
     }
 
-    override suspend fun checkAnswer(answerId: Long): String {
-        return "success"
+    override suspend fun checkAnswer(isAnswerRight: Boolean): Boolean {
+        return isAnswerRight
     }
 }
