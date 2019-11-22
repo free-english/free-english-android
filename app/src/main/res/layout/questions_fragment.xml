@@ -7,14 +7,62 @@
     android:layout_height="match_parent"
     tools:context=".questions.QuestionFragment">
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MainFragment"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button1"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@id/button3"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button2"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@id/button4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button1" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button3"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@id/nextButton"
+        app:layout_constraintEnd_toStartOf="@+id/button4"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="578dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button4"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@id/nextButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button3" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/question"
+        android:layout_width="420dp"
+        android:layout_height="320dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/button1"
+        app:layout_constraintVertical_bias="0"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/nextButton"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
