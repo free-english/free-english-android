@@ -30,7 +30,7 @@ suspend fun initDataBase(context: Context) {
             val database = AppDatabase.getInstance(context)
 
             val result = mapToDb(definitions)
-          database.dataSyncDao().insertWords(result.first)
+          database.dataSyncDao().setupInitialData(result.first,result.second)
 
         }
     }
