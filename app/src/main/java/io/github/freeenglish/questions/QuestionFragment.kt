@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
+import androidx.transition.TransitionManager
 import io.github.freeenglish.R
 import io.github.freeenglish.ViewModels.QuestionsViewModel
 import io.github.freeenglish.ViewModels.ScreenState
@@ -17,6 +19,7 @@ import kotlinx.android.synthetic.main.questions_fragment.*
 class QuestionFragment : Fragment() {
 
     var buttons: Array<AppCompatButton?> = emptyArray()
+
 
     companion object {
         fun newInstance() = QuestionFragment()
@@ -62,11 +65,13 @@ class QuestionFragment : Fragment() {
 
 
     private fun updateNextState(state: ScreenState.Result) {
+        addAnimationOperations()
         questionState.visibility = View.GONE
         nextState.visibility = View.VISIBLE
     }
 
     private fun updateQuestionState(state: ScreenState.QuestionState) {
+        addAnimationOperations()
         nextState.visibility = View.GONE
         questionState.visibility = View.VISIBLE
         question.text = state.question.question
@@ -80,6 +85,12 @@ class QuestionFragment : Fragment() {
 
             }
         }
+    }
+    private fun addAnimationOperations() {
+        val constraint1 = ConstraintSet()
+        constraint1.clone(main)
+        TransitionManager.beginDelayedTransition(main)
+        constraint1.applyTo(main)
     }
 
 
