@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import io.github.freeenglish.R
 import io.github.freeenglish.ViewModels.QuestionsViewModel
 import io.github.freeenglish.ViewModels.ScreenState
@@ -35,11 +36,25 @@ class QuestionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         buttons = arrayOf(button1, button2, button3, button4)
-        viewModel.state.observe(viewLifecycleOwner,
-            Observer { state -> updateQuestionState(state as ScreenState.QuestionState)})
+        questionState.visibility = View.GONE
+        nextState.visibility = View.GONE
+
+        viewModel.state.observe(viewLifecycleOwner) {
+            when (it) {
+                is ScreenState.QuestionState -> updateQuestionState(it)
+                is ScreenState.Result -> updateNextState(it)
+            }
+        }
+    }
+
+    private fun updateNextState(state: ScreenState.Result) {
+        questionState.visibility = View.GONE
+        nextState.visibility = View.VISIBLE
     }
 
     private fun updateQuestionState(state: ScreenState.QuestionState) {
+        nextState.visibility = View.GONE
+        questionState.visibility = View.VISIBLE
         question.text = state.question.question
 
         buttons.forEachIndexed { index, appCompatButton ->
@@ -47,7 +62,7 @@ class QuestionFragment : Fragment() {
                 appCompatButton?.visibility = View.VISIBLE
                 appCompatButton?.text = state.question.answers[index].value
             } else {
-                appCompatButton?.visibility = View.INVISIBLE
+                appCompatButton?.text = ""
 
             }
         }
