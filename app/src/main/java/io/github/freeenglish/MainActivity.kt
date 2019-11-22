@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import io.github.freeenglish.data.AppDatabase
 import io.github.freeenglish.data.entities.Word
+import io.github.freeenglish.data.sync.initDataBase
 import io.github.freeenglish.questions.QuestionFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
