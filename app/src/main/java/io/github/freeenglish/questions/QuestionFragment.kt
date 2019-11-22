@@ -3,13 +3,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
-import androidx.transition.TransitionManager
 import io.github.freeenglish.R
+import androidx.transition.TransitionManager
+
 import io.github.freeenglish.ViewModels.QuestionsViewModel
 import io.github.freeenglish.ViewModels.ScreenState
 import io.github.freeenglish.data.AppDatabase
@@ -52,26 +53,40 @@ class QuestionFragment : Fragment() {
     }
 
     private fun addClickForBtns() {
-        for (button in buttons){
+        buttons.forEachIndexed { index, button ->
             button?.setOnClickListener {
-                viewModel.onAnswerClick(1)
+                viewModel.onAnswerClick(index)
             }
-        }
-        nextButton.setOnClickListener {
-            viewModel.onNextClick()
+
+            nextButton.setOnClickListener {
+                viewModel.onNextClick()
+            }
         }
     }
 
 
 
-    private fun updateNextState(state: ScreenState.Result) {
-        addAnimationOperations()
+    private fun updateNextState(resultState: ScreenState.Result) {
         questionState.visibility = View.GONE
         nextState.visibility = View.VISIBLE
+        if (resultState.isRight){
+            answer_right.setImageDrawable(
+                ContextCompat.getDrawable(
+                    context!!, // Context
+                    R.drawable.answer_right // Drawable
+                )
+            )
+        } else {
+            answer_right.setImageDrawable(
+                ContextCompat.getDrawable(
+                    context!!, // Context
+                    R.drawable.answer_wrong // Drawable
+                )
+            )
+        }
     }
 
     private fun updateQuestionState(state: ScreenState.QuestionState) {
-        addAnimationOperations()
         nextState.visibility = View.GONE
         questionState.visibility = View.VISIBLE
         question.text = state.question.question
@@ -85,12 +100,6 @@ class QuestionFragment : Fragment() {
 
             }
         }
-    }
-    private fun addAnimationOperations() {
-        val constraint1 = ConstraintSet()
-        constraint1.clone(main)
-        TransitionManager.beginDelayedTransition(main)
-        constraint1.applyTo(main)
     }
 
 
