@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import io.github.freeenglish.R
+import io.github.freeenglish.ViewModels.QuestionsViewModel
 import io.github.freeenglish.data.AppDatabase
 import io.github.freeenglish.utils.viewModels
 import kotlinx.android.synthetic.main.questions_fragment.*
@@ -30,7 +31,7 @@ class QuestionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.question.observe(viewLifecycleOwner) {
-            message.text = it
+           // message.text = it
         }
     }
 }
