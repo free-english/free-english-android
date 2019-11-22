@@ -23,7 +23,7 @@ class AskUserUseCaseImplementation(
         val word = questionsDao.getWordWithDefinitions()
         return Question(
             id = 1,
-            question = word.word.value,
+            question = word.word?.value ?: "",
             answers = listOf(
                 Answer(1, "1"),
                 Answer(2, "2"),
