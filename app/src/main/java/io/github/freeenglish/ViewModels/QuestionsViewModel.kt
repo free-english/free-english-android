@@ -1,30 +1,40 @@
 package io.github.freeenglish.ViewModels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import io.github.freeenglish.questions.Answer
+import androidx.lifecycle.*
 import io.github.freeenglish.questions.AskUserUseCase
 import io.github.freeenglish.questions.Question
+import kotlinx.coroutines.launch
 
 class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel() {
-    val state: LiveData<ScreenState> = liveData<ScreenState> {
-        emit(ScreenState.QuestionState(askUserUseCase.askQuestion()))
-        //emit(askUserUseCase.askQuestion().state)
+    private val _state: MutableLiveData<ScreenState> = MutableLiveData()
+    val state: LiveData<ScreenState> get() = _state
+
+    init {
+        viewModelScope.launch {
+            _state.value = ScreenState.QuestionState(askUserUseCase.askQuestion())
+        }
     }
 
-    fun onNewResult(res: Answer){
+    fun onAnswerClick(answerId: Long) {
+        viewModelScope.launch {
+            _state.value = ScreenState.Result(askUserUseCase.checkAnswer(answerId))
+        }
+
 
     }
 
-
+    fun onNextClick() {
+        viewModelScope.launch {
+            _state.value = ScreenState.QuestionState(askUserUseCase.askQuestion())
+        }
+    }
 }
 
 
-sealed class ScreenState(){
+sealed class ScreenState() {
     data class QuestionState(val question: Question): ScreenState()
 
-    class Result(): ScreenState(){
+    class Result(val result: String): ScreenState(){
 
     }
 

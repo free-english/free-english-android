@@ -14,6 +14,7 @@ data class Answer(
 
 interface AskUserUseCase {
     suspend fun askQuestion(): Question
+    suspend fun checkAnswer(answerId: Long): String
 }
 
 class AskUserUseCaseImplementation(
@@ -30,5 +31,9 @@ class AskUserUseCaseImplementation(
             ),
             correctAnswerId = word.definitions[0].id
         )
+    }
+
+    override suspend fun checkAnswer(answerId: Long): String {
+        return "success"
     }
 }

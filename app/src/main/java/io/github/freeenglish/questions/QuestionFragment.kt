@@ -36,6 +36,7 @@ class QuestionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         buttons = arrayOf(button1, button2, button3, button4)
+        addClickForBtns()
         questionState.visibility = View.GONE
         nextState.visibility = View.GONE
 
@@ -46,6 +47,19 @@ class QuestionFragment : Fragment() {
             }
         }
     }
+
+    private fun addClickForBtns() {
+        for (button in buttons){
+            button?.setOnClickListener {
+                viewModel.onAnswerClick(1)
+            }
+        }
+        nextButton.setOnClickListener {
+            viewModel.onNextClick()
+        }
+    }
+
+
 
     private fun updateNextState(state: ScreenState.Result) {
         questionState.visibility = View.GONE
