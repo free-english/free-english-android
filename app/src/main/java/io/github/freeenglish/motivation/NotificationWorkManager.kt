@@ -47,19 +47,18 @@ class NotificationWorkManager(
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
 
-        //TODO Check we need a channel
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            val name = "SomeChannel"
-//            val descriptionText = "SomeNotificationCnannel"
-//            val importance = NotificationManager.IMPORTANCE_DEFAULT
-//            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-//                description = descriptionText
-//            }
-//
-//            val channelManager: NotificationManager =
-//                getSystemService(context, NotificationManager::class.java) as NotificationManager
-//            channelManager.createNotificationChannel(channel)
-//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "SomeChannel"
+            val descriptionText = "SomeNotificationCnannel"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+
+            val channelManager: NotificationManager =
+                getSystemService(context, NotificationManager::class.java) as NotificationManager
+            channelManager.createNotificationChannel(channel)
+       }
         val notificationManager =
             NotificationManagerCompat.from(applicationContext)
         notificationManager.notify(NOTIFY_ID, builder.build())
