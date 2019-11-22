@@ -8,9 +8,9 @@ import io.github.freeenglish.questions.AskUserUseCase
 import io.github.freeenglish.questions.Question
 
 class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel() {
-    val question: LiveData<ScreenState> = liveData<ScreenState> {
+    val state: LiveData<ScreenState> = liveData<ScreenState> {
         emit(ScreenState.QuestionState(askUserUseCase.askQuestion()))
-        //emit(askUserUseCase.askQuestion().question)
+        //emit(askUserUseCase.askQuestion().state)
     }
 
     fun onNewResult(res: Answer){
