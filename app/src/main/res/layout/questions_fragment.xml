@@ -14,7 +14,7 @@
         android:text="Button"
         app:layout_constraintBottom_toTopOf="@id/button3"
         app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button2"
@@ -49,12 +49,12 @@
         android:layout_width="420dp"
         android:layout_height="320dp"
         android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/button1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/button1"
-        app:layout_constraintVertical_bias="0"/>
+        app:layout_constraintVertical_bias="0" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nextButton"
@@ -64,5 +64,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/questionState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="question,button1,button2,button3,button4" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/nextState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="nextButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
