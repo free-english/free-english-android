@@ -39,7 +39,6 @@ class NotificationWorkManager(
         val pendingIntent =
             PendingIntent.getActivity(applicationContext, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-//        Log.d("doWorkRun", "doworkcalled")
         val builder =
             NotificationCompat.Builder(applicationContext, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notification_icon)
@@ -48,19 +47,19 @@ class NotificationWorkManager(
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "SomeChannel"
-            val descriptionText = "SomeNotificationCnannel"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-                description = descriptionText
-            }
-
-            val channelManager: NotificationManager =
-                getSystemService(context, NotificationManager::class.java) as NotificationManager
-            channelManager.createNotificationChannel(channel)
-        }
+        //TODO Check we need a channel
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val name = "SomeChannel"
+//            val descriptionText = "SomeNotificationCnannel"
+//            val importance = NotificationManager.IMPORTANCE_DEFAULT
+//            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+//                description = descriptionText
+//            }
+//
+//            val channelManager: NotificationManager =
+//                getSystemService(context, NotificationManager::class.java) as NotificationManager
+//            channelManager.createNotificationChannel(channel)
+//        }
         val notificationManager =
             NotificationManagerCompat.from(applicationContext)
         notificationManager.notify(NOTIFY_ID, builder.build())
