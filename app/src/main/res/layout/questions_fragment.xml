@@ -6,14 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".questions.QuestionFragment">
+
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/answer_right"
         android:id="@+id/answer_right"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="312dp"
+        android:layout_height="530dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/answer_right"
+        app:layout_constraintBottom_toTopOf="@id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/nextButton"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button1"
@@ -103,25 +105,89 @@
         android:id="@+id/nextButton"
         android:layout_width="120dp"
         android:layout_height="70dp"
+        android:layout_marginBottom="15dp"
         android:text="Next"
+        android:textColor="#F10606"
+        android:textSize="24sp"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/rightNameplate"
+        app:layout_constraintStart_toStartOf="@id/rightNameplate"
+        app:layout_constraintTop_toBottomOf="@+id/button4"
         app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintTop_toBottomOf="@+id/button4"/>
+        android:elevation="6dp"
+        android:stateListAnimator="@null"
+        android:translationZ="6dp"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/questionState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="card_view,button1,button2,button3,button4"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/nextState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="nextButton,answer_right"
-        tools:visibility="gone" />
+        app:constraint_referenced_ids="nextButton,answer_right,rightNameplate"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/congrat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="143dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="142dp"
+        android:text="CONGRATS!"
+        android:textColor="#E90606"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rightNameplate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_border"
+        app:layout_constraintBottom_toTopOf="@+id/nextButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/rightText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:gravity="center"
+                android:text="*right answer*"
+                android:textColor="#F30606"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/descriptionNameplate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="Might to be not wrong"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
