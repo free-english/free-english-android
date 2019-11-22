@@ -4,6 +4,9 @@
     android:height="2560dp"
     android:viewportWidth="1440"
     android:viewportHeight="2560">
+  <path android:name="square"
+      android:fillColor="#FFFFFF"
+      android:pathData="M0,0 L1440,0 L1440,2560 L0,2560 z" />
   <path
       android:pathData="M882.52,1282.64c6.3,0 10.8,-5.4 10.8,-11.25c0,-2.7 -0.9,-5.4 -3.15,-7.65c-1.8,-1.8 -4.5,-3.15 -7.65,-3.15c-2.7,0 -5.85,1.35 -7.65,3.15c-1.8,2.25 -3.15,4.95 -3.15,7.65C871.72,1277.24 876.22,1282.64 882.52,1282.64z">
     <aapt:attr name="android:fillColor">

@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer
 import io.github.freeenglish.data.AppDatabase
 import io.github.freeenglish.data.entities.Word
 import io.github.freeenglish.questions.QuestionFragment
-import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
             wordLiveData.observe(this, object : Observer<Word> {
                 override fun onChanged(t: Word?) {
                     if (t != null) {
-                        container.background = null
+                        window.setBackgroundDrawableResource(R.color.white)
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.container, QuestionFragment.newInstance())
                             .commitNow()
@@ -26,6 +25,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             })
+        } else {
+            window.setBackgroundDrawableResource(R.color.white)
         }
     }
 }
