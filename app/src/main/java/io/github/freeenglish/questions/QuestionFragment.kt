@@ -67,7 +67,6 @@ class QuestionFragment : Fragment() {
 
 
     private fun updateNextState(resultState: ScreenState.Result) {
-        addAnimationOperations()
         questionState.visibility = View.GONE
         nextState.visibility = View.VISIBLE
         if (resultState.isRight){
@@ -88,7 +87,6 @@ class QuestionFragment : Fragment() {
     }
 
     private fun updateQuestionState(state: ScreenState.QuestionState) {
-        addAnimationOperations()
         nextState.visibility = View.GONE
         questionState.visibility = View.VISIBLE
         question.text = state.question.question
@@ -102,12 +100,6 @@ class QuestionFragment : Fragment() {
 
             }
         }
-    }
-    private fun addAnimationOperations() {
-        val constraint1 = ConstraintSet()
-        constraint1.clone(main)
-        TransitionManager.beginDelayedTransition(main)
-        constraint1.applyTo(main)
     }
 
 

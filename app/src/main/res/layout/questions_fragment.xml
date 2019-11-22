@@ -15,15 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/nextButton"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/answer_wrong"
-        android:id="@+id/answer_wrong"
-        app:layout_constraintBottom_toTopOf="@id/nextButton"/>
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button1"
         android:layout_width="250dp"
@@ -129,7 +120,7 @@
         android:id="@+id/nextState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="nextButton,answer_right,answer_wrong"
+        app:constraint_referenced_ids="nextButton,answer_right"
         tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
