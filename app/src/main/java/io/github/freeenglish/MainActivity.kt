@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
             wordLiveData.observe(this, object : Observer<Word> {
                 override fun onChanged(t: Word?) {
                     if (t != null) {
+                        window.setBackgroundDrawableResource(R.color.white)
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.container, QuestionFragment.newInstance())
                             .commitNow()
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             })
+        } else {
+            window.setBackgroundDrawableResource(R.color.white)
         }
     }
 }
