@@ -1,7 +1,9 @@
 package io.github.freeenglish.data.sync
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.Query
 import androidx.room.Transaction
 import io.github.freeenglish.data.entities.Definition
 import io.github.freeenglish.data.entities.Word
@@ -19,4 +21,7 @@ interface DataSyncDao {
         insertWords(words)
         insertDefinitions(definitions)
     }
+
+    @Query("select * from words LIMIT 1")
+    fun getAnyWord(): LiveData<Word>
 }
