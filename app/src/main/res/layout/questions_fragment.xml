@@ -95,7 +95,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="TEXT" />
+            android:text="TEXT"
+            android:textSize="30sp" />
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatButton
