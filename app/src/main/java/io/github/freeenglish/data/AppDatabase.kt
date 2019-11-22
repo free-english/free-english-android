@@ -9,7 +9,9 @@ import io.github.freeenglish.data.entities.Definition
 import io.github.freeenglish.data.entities.Word
 import io.github.freeenglish.data.sync.DataSyncDao
 import io.github.freeenglish.questions.QuestionsDao
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @Database(
     entities = [
@@ -41,7 +43,7 @@ abstract class AppDatabase : RoomDatabase() {
                 .addCallback(object : RoomDatabase.Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
-                        runBlocking {
+                        GlobalScope.launch(Dispatchers.IO) {
                             val word = Word(id = 1, value = "Take aback")
                             val definition = Definition(
                                 id = 1,

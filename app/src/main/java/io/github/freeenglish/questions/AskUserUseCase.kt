@@ -20,9 +20,10 @@ class AskUserUseCaseImplementation(
     private val questionsDao: QuestionsDao
 ) : AskUserUseCase {
     override suspend fun askQuestion(): Question {
+        val word = questionsDao.getWordWithDefinitions()
         return Question(
             id = 1,
-            question = "2 x 2 = ?",
+            question = word.word.value,
             answers = listOf(
                 Answer(1, "1"),
                 Answer(2, "2"),
