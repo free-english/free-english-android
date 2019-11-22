@@ -22,8 +22,7 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 
 
 sealed class ScreenState(){
-    data class QuestionState(val question: Question):
-        ScreenState()
+    data class QuestionState(val question: Question): ScreenState()
 
     class Result(): ScreenState(){
 
