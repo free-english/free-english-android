@@ -8,6 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import io.github.freeenglish.data.entities.Definition
 import io.github.freeenglish.data.entities.Word
 import io.github.freeenglish.data.sync.DataSyncDao
+import io.github.freeenglish.data.sync.initDataBase
 import io.github.freeenglish.questions.QuestionsDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -44,15 +45,7 @@ abstract class AppDatabase : RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
                         GlobalScope.launch(Dispatchers.IO) {
-                            val word = Word(id = 1, value = "Take aback")
-                            val definition = Definition(
-                                id = 1,
-                                meaning = "surprise or shock",
-                                examples = "The bad news took us aback.",
-                                wordId = 1
-                            )
-                            instance!!.dataSyncDao()
-                                .setupInitialData(listOf(word), listOf(definition))
+                            initDataBase(context)
                         }
                     }
                 })

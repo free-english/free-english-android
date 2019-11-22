@@ -14,6 +14,7 @@ data class Answer(
 
 interface AskUserUseCase {
     suspend fun askQuestion(): Question
+    suspend fun checkAnswer(answerId: Long): String
 }
 
 class AskUserUseCaseImplementation(
@@ -25,12 +26,14 @@ class AskUserUseCaseImplementation(
             id = 1,
             question = word.word.value,
             answers = listOf(
-                Answer(1, "1"),
-                Answer(2, "2"),
-                Answer(3, "3"),
-                Answer(4, "4")
+                Answer(1, word.definitions[0].meaning),
+                Answer(2, "wrong")
             ),
-            correctAnswerId = 2
+            correctAnswerId = word.definitions[0].id
         )
+    }
+
+    override suspend fun checkAnswer(answerId: Long): String {
+        return "success"
     }
 }

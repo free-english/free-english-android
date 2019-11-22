@@ -1,0 +1,453 @@
+[
+  {
+    "value": "Wear in",
+    "definitions": [
+      {
+        "meaning": "If you wear in smth such as a pair of shoes, you wear them until they fit you better and are more comfortable",
+        "examples": [
+          "It’s always so painful wearing in new shoes."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Wrap up",
+    "definitions": [
+      {
+        "meaning": "Put warm clothes on",
+        "examples": [
+          "I could hear my mother telling me to wrap up warm."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Check in",
+    "definitions": [
+      {
+        "meaning": "Arrive and register at a hotel or airport",
+        "examples": [
+          "Please check in at least an hour before departure."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Check out",
+    "definitions": [
+      {
+        "meaning": "Leave the hotel after paying",
+        "examples": [
+          "We checked out at noon."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Take out",
+    "definitions": [
+      {
+        "meaning": "Remove",
+        "examples": [
+          "Please take out the trash before the whole house starts to smell."
+        ]
+      },
+      {
+        "meaning": "Invite on a date",
+        "examples": [
+          "Let me take you out for dinner."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Take over",
+    "definitions": [
+      {
+        "meaning": "Adopt a responsibility or duty from someone else",
+        "examples": [
+          "He will take over the job permanently when the accountant retires."
+        ]
+      },
+      {
+        "meaning": "Buy out the ownership of a business",
+        "examples": [
+          "Facebook took over Instagram several years ago."
+        ]
+      },
+      {
+        "meaning": "Take control",
+        "examples": [
+          "The general took over the country after the revolution."
+        ]
+      },
+      {
+        "meaning": "Annex a territory by conquest or invasion",
+        "examples": [
+          "Ancient Rome took over lands throughout the known world."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Take to",
+    "definitions": [
+      {
+        "meaning": "Adapt to; learn; master",
+        "examples": [
+          "She took to swimming like a fish."
+        ]
+      },
+      {
+        "meaning": "Begin a new habit",
+        "examples": [
+          "She took to smoking after the accident."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Take through",
+    "definitions": [
+      {
+        "meaning": "Explain a process in detail",
+        "examples": [
+          "I’ll take you through how to set up a web server."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get off",
+    "definitions": [
+      {
+        "meaning": "Move from being on top of (something) to not being on top of it",
+        "examples": [
+          "Get off your chair and help me."
+        ]
+      },
+      {
+        "meaning": "Leave a transport",
+        "examples": [
+          "You get off the train at the third stop."
+        ]
+      },
+      {
+        "meaning": "Stop using a phone or computer",
+        "examples": [
+          "Can you get off the phone, please? I need your help. "
+        ]
+      },
+      {
+        "meaning": "Leave work earlier or later than usual",
+        "examples": [
+          "If I can get off early tomorrow, I’ll give you a ride home."
+        ]
+      },
+      {
+        "meaning": "Stop touching or interfering with something or someone",
+        "examples": [
+          "Don’t touch me – get off!"
+        ]
+      },
+      {
+        "meaning": "Begin a sexual relationship with smb",
+        "examples": [
+          "I’d like to get off with him after the party."
+        ]
+      },
+      {
+        "meaning": "Escape (with usually only mild consequences)",
+        "examples": [
+          "The vandal got off easy, with only a fine."
+        ]
+      },
+      {
+        "meaning": "Fall asleep, usually with difficulty",
+        "examples": [
+          "If I wake up during the night, I cannot get off again."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get on",
+    "definitions": [
+      {
+        "meaning": "Board smth, usually a vehicle",
+        "examples": [
+          "Please get on the bus as quickly as possible."
+        ]
+      },
+      {
+        "meaning": "Be successful, progress",
+        "examples": [
+          "She’s getting on very well at school."
+        ]
+      },
+      {
+        "meaning": "Become late",
+        "examples": [
+          "Time is getting on."
+        ]
+      },
+      {
+        "meaning": "Become old",
+        "examples": [
+          "My parents are visibly getting on a bit these days."
+        ]
+      },
+      {
+        "meaning": "Have a good relationship",
+        "examples": [
+          "I wish you and I could learn to get on."
+        ]
+      },
+      {
+        "meaning": "Start doing",
+        "examples": [
+          "The dishes need washing, the floor needs vacuuming, laundry needs folding. Get on it!"
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get on with",
+    "definitions": [
+      {
+        "meaning": "Begin or continue",
+        "examples": [
+          "I have to get on with my task."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get out",
+    "definitions": [
+      {
+        "meaning": "Leave or escape",
+        "examples": [
+          "In case of fire, get out by the nearest exit."
+        ]
+      },
+      {
+        "meaning": "Become known",
+        "examples": [
+          "Somehow the secret got out."
+        ]
+      },
+      {
+        "meaning": "Spend free time out of the house",
+        "examples": [
+          "You work too hard. You should get out more."
+        ]
+      },
+      {
+        "meaning": "Eliminate dirt or stains",
+        "examples": [
+          "This detergent will get most household stains out."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get out of",
+    "definitions": [
+      {
+        "meaning": "Avoid doing smth",
+        "examples": [
+          "I only cheat so I can get out of doing work."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get over",
+    "definitions": [
+      {
+        "meaning": "Overcome",
+        "examples": [
+          "I’m trying to get over my fear of flying."
+        ]
+      },
+      {
+        "meaning": "Recover",
+        "examples": [
+          "I’m having problems getting over a bad cold."
+        ]
+      },
+      {
+        "meaning": "Forget and move on",
+        "examples": [
+          "She was in love with me for 10 years, and still hasn’t got over the fact that the feeling wasn’t mutual."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get rid of",
+    "definitions": [
+      {
+        "meaning": "Remove",
+        "examples": [
+          "I want to get rid of your influence over my life!"
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get through",
+    "definitions": [
+      {
+        "meaning": "Overcome; endure",
+        "examples": [
+          "Military training was hard, but I got through it"
+        ]
+      },
+      {
+        "meaning": "Complete; finish",
+        "examples": [
+          "She got through her book this morning!"
+        ]
+      },
+      {
+        "meaning": "Be made successfully",
+        "examples": [
+          "The call wouldn’t get through no matter how many times I tried."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get through to",
+    "definitions": [
+      {
+        "meaning": "Make smb understand",
+        "examples": [
+          "I feel I’m not getting through to some of the kids in my class."
+        ]
+      },
+      {
+        "meaning": "Reach a stage in a competition",
+        "examples": [
+          "She got through to the final round of interviews."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get to",
+    "definitions": [
+      {
+        "meaning": "Reach; arrive at",
+        "examples": [
+          "I’ll call you when I get to the railway station."
+        ]
+      },
+      {
+        "meaning": "Be allowed to",
+        "examples": [
+          "And you get to be the team’s captain!"
+        ]
+      },
+      {
+        "meaning": "Affect in a bad way; upset or annoy",
+        "examples": [
+          "This job is really getting to me. I don’t know how much longer I’ll last."
+        ]
+      },
+      {
+        "meaning": "Track down and find smb, and threaten them",
+        "examples": [
+          "He’s refusing to tell the truth. I think the government got to him."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get together",
+    "definitions": [
+      {
+        "meaning": "Meet socially",
+        "examples": [
+          "We used to get together with our friends every Friday at this cafe."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get up",
+    "definitions": [
+      {
+        "meaning": "Move upwards",
+        "examples": [
+          "I’m having difficulty getting up the stairs."
+        ]
+      },
+      {
+        "meaning": "Rise from one’s bed",
+        "examples": [
+          "I didn’t get up until midday."
+        ]
+      },
+      {
+        "meaning": "Stand up",
+        "examples": [
+          "Get up and clean this mess!"
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Get up to",
+    "definitions": [
+      {
+        "meaning": "Do something, especially something that you should not do",
+        "examples": [
+          "Recently he’s been getting up to all sorts of mischief."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Take aback",
+    "definitions": [
+      {
+        "meaning": "surprise or shock",
+        "examples": [
+          "The bad news took us aback."
+        ]
+      }
+    ]
+  },
+  {
+    "value": "Take up",
+    "definitions": [
+      {
+        "meaning": "Start doing an activity (usually a hobby)",
+        "examples": [
+          "I’ve taken up knitting."
+        ]
+      },
+      {
+        "meaning": "Address, discuss (usually an issue)",
+        "examples": [
+          "Let’s take this up with the manager."
+        ]
+      },
+      {
+        "meaning": "Fill a lot of space or time",
+        "examples": [
+          "The English homework takes up most of my weekend."
+        ]
+      },
+      {
+        "meaning": "Accept smb’s offer and remember it when the time comes",
+        "examples": [
+          "Shall we take them up on their offer to help us move?"
+        ]
+      }
+    ]
+  }
+]
