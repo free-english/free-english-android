@@ -12,6 +12,7 @@ import io.github.freeenglish.motivation.UserStatDao
 import io.github.freeenglish.progress.DefinitionsInProgressFragment
 import io.github.freeenglish.questions.QuestionFragment
 import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.questions_fragment.*
 
 class MainFragment : Fragment() {
 
@@ -33,6 +34,12 @@ class MainFragment : Fragment() {
             val appDataBase = AppDatabase.getInstance(context!!).statDao()
             words_in_db.text = " / " + appDataBase.getAllDifinitionsCount().toString()
             user_vocabulary.text = appDataBase.getUserVocaburyCount().toString()
+
+            val appDataBase2 = AppDatabase.getInstance(context!!).questionsDao().getWordWithDefinitions()
+            day_word.text = appDataBase2.word.value
+
+
+            example.text = appDataBase2.definitions[0].meaning + "\n" + appDataBase2.definitions[0].examples
 
         }
         startTestButton.setOnClickListener {
