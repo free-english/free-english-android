@@ -9,6 +9,7 @@ import io.github.freeenglish.data.entities.Definition
 import io.github.freeenglish.data.entities.Word
 import io.github.freeenglish.data.sync.DataSyncDao
 import io.github.freeenglish.data.sync.initDataBase
+import io.github.freeenglish.motivation.UserStatDao
 import io.github.freeenglish.questions.QuestionsDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -26,6 +27,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun questionsDao(): QuestionsDao
 
     abstract fun dataSyncDao(): DataSyncDao
+
+    abstract fun statDao(): UserStatDao
 
     companion object {
 

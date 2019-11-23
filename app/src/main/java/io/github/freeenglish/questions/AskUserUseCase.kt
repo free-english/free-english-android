@@ -19,8 +19,8 @@ data class Answer(
 
 interface AskUserUseCase {
     suspend fun askQuestion(): Question
-    suspend fun userHasAnswer(rightDefinitionId: Long, isAnswerRight: Boolean)
-//    suspend fun chekRightAnswerts(userHasAnswer: Answer)
+    suspend fun userHasAnswered(rightDefinitionId: Long, isAnswerRight: Boolean)
+//    suspend fun chekRightAnswerts(userHasAnswered: Answer)
 }
 
 class AskUserUseCaseImplementation(
@@ -39,19 +39,18 @@ class AskUserUseCaseImplementation(
     }
 
 
-    override suspend fun userHasAnswer(
+    override suspend fun userHasAnswered(
         rightDefinitionId: Long,
         isAnswerRight: Boolean
     ){
         var definition = questionsDao.getDefinition(rightDefinitionId)
-        if (isAnswerRight) {
-            definition = definition.copy(correctAnswerInTheRow = definition.correctAnswerInTheRow + 1)
+        val upatedDefinition = if (isAnswerRight) {
+            definition.copy(correctAnswerInTheRow = definition.correctAnswerInTheRow + 1)
         }
         else {
-            definition = definition.copy(correctAnswerInTheRow = 0)
+            definition.copy(correctAnswerInTheRow = 0)
         }
-
-         questionsDao.updateDefinition(definition)
+         questionsDao.updateDefinition(upatedDefinition)
     }
 
 
