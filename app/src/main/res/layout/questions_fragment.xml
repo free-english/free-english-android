@@ -11,7 +11,7 @@
         android:id="@+id/answer_right"
         android:layout_width="312dp"
         android:layout_height="530dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:src="@drawable/answer_right"
         app:layout_constraintBottom_toTopOf="@id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,21 +103,21 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nextButton"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginBottom="15dp"
+        android:background="#FFFFFF"
+        android:elevation="6dp"
+        android:stateListAnimator="@null"
         android:text="Next"
         android:textColor="#F10606"
         android:textSize="24sp"
-        android:background="#FFFFFF"
+        android:translationZ="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/rightNameplate"
-        app:layout_constraintStart_toStartOf="@id/rightNameplate"
+        app:layout_constraintEnd_toEndOf="@id/llayout"
+        app:layout_constraintStart_toStartOf="@id/llayout"
         app:layout_constraintTop_toBottomOf="@+id/button4"
-        app:layout_constraintVertical_bias="1.0"
-        android:elevation="6dp"
-        android:stateListAnimator="@null"
-        android:translationZ="6dp"/>
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/questionState"
@@ -130,7 +130,7 @@
         android:id="@+id/nextState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="nextButton,answer_right,rightNameplate"
+        app:constraint_referenced_ids="nextButton,answer_right,llayout"
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="143dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="142dp"
         android:text="CONGRATS!"
         android:textColor="#E90606"
@@ -148,46 +148,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/rightNameplate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/llayout"
+        android:layout_width="320dp"
+        android:layout_height="130dp"
         android:layout_gravity="center"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/button_border"
+        android:orientation="vertical"
+        android:padding="15dp"
         app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answer_right"
+        app:layout_constraintVertical_bias="1.0"
+        tools:visibility="visible">
 
-        <LinearLayout
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rightText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="15dp">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="*right answer*"
+            android:textColor="#F30606"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/rightText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="7dp"
-                android:gravity="center"
-                android:text="*right answer*"
-                android:textColor="#F30606"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/descriptionNameplate"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:text="Might to be not wrong"
-                android:textAlignment="center"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/descriptionNameplate"
+            android:layout_width="266dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Might to be not wrong"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
