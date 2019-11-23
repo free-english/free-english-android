@@ -45,10 +45,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@id/learned"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/free_eng"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
@@ -115,7 +115,6 @@
         app:layout_constraintEnd_toStartOf="@+id/words_in_db"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/learned"
         tools:text="0" />
 
     <TextView
@@ -131,7 +130,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/user_vocabulary"
-        app:layout_constraintTop_toBottomOf="@+id/total"
         tools:text=" / 56" />
 
     <TextView
@@ -148,7 +146,6 @@
         app:layout_constraintEnd_toEndOf="@+id/user_vocabulary"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -166,13 +163,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/words_in_db"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/free_eng"
-        android:layout_width="326dp"
-        android:layout_height="193dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="42dp"
         android:scaleType="centerInside"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
