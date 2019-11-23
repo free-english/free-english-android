@@ -27,20 +27,23 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
             if (_currentState != null && _currentState!!.question.answers.size > answerPos) {
                 ++allAnswers
                 val correctAnswer = _currentState!!.question.correctAnswer.id == _currentState!!.question.answers[answerPos].id
-                askUserUseCase.userHasAnswer(_currentState!!.question.correctAnswer.id ,correctAnswer)
+                askUserUseCase.userHasAnswer(_currentState!!.question.correctAnswer.id, correctAnswer)
                 if (correctAnswer) {
                     ++rightAnswers
                     _state.value = ScreenState.CorrectAnswer(
                         word = _currentState!!.question.question,
                         meaning = _currentState!!.question.correctAnswer.meaning,
-                        examples = _currentState!!.question.correctAnswer.examples
+                        examples = _currentState!!.question.correctAnswer.examples,
+                        countAll = allAnswers
                     )
                 }
                 else {
                     _state.value = ScreenState.WrongAnswer(
                         word = _currentState!!.question.question,
                         meaning = _currentState!!.question.correctAnswer.meaning,
-                        examples = _currentState!!.question.correctAnswer.examples
+                        examples = _currentState!!.question.correctAnswer.examples,
+                        countAll = allAnswers
+
                     )
                 }
                 if (allAnswers == 10){
@@ -68,8 +71,8 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 
 sealed class ScreenState() {
     data class QuestionState(val question: Question): ScreenState()
-    data class CorrectAnswer(val word: String, val meaning: String, val examples: String): ScreenState()
-    data class WrongAnswer(val word: String, val meaning: String, val examples: String): ScreenState()
+    data class CorrectAnswer(val word: String, val meaning: String, val examples: String, val countAll: Int): ScreenState()
+    data class WrongAnswer(val word: String, val meaning: String, val examples: String, val countAll: Int): ScreenState()
     data class TestIsFinished(val correctAnswersCount: Int, val totalAnswersCount: Int): ScreenState()
 }
 
