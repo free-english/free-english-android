@@ -51,7 +51,7 @@ class AskUserUseCaseImplementation(
             definition = definition.copy(correctAnswerInTheRow = 0)
         }
 
-        return questionsDao.updateDefinition(definition)
+         questionsDao.updateDefinition(definition)
     }
 
 
@@ -70,6 +70,9 @@ class AskUserUseCaseImplementation(
             ).sortedBy {Random.nextInt(0, 10)},
             correctAnswer = word.definitions[random]
         )
+
+
+
 
         return question
     }
