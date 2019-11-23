@@ -1,11 +1,7 @@
 package io.github.freeenglish.data.sync
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import io.github.freeenglish.data.entities.Definition
 import io.github.freeenglish.data.entities.Word
 

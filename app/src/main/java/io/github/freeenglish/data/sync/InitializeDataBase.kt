@@ -15,13 +15,10 @@ const val FILE_PATH = "questions.json"
 suspend fun initDataBase(context: Context) {
 
 
-//    AssetManager am  = this.getAssets()
 
     val assetsManager =context.assets
 
 
-   // android.os.Debug.waitForDebugger()
-//    Log.d("TESTTAG",assetsManager.list("").toString())
     assetsManager.open(FILE_PATH).use { inputStream ->
         JsonReader(inputStream.reader()).use { jsonReader ->
             val plantType = object : TypeToken<List<Definitions>>() {}.type
