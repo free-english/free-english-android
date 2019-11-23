@@ -13,4 +13,5 @@ interface UserStatDao {
 
     @Query("SELECT COUNT() FROM definitions WHERE correctAnswerInTheRow >=1 ")
     suspend fun  getUserVocaburyCount(): Long
+
 }
