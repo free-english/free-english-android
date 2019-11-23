@@ -142,7 +142,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="142dp"
-        android:text="CONGRATS!"
         android:textColor="#E90606"
         android:textSize="36sp"
         android:textStyle="bold"

@@ -11,6 +11,9 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 
     private var _currentState: ScreenState.QuestionState? = null
 
+    private var rightAnswers: Int = 0
+    private var allAnswers: Int = 0
+
     init {
         viewModelScope.launch {
             val state = ScreenState.QuestionState(askUserUseCase.askQuestion())
@@ -22,20 +25,28 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
     fun onAnswerClick(answerPos: Int) {
         viewModelScope.launch {
             if (_currentState != null && _currentState!!.question.answers.size > answerPos) {
+                ++allAnswers
                 val correctAnswer = _currentState!!.question.correctAnswer.id == _currentState!!.question.answers[answerPos].id
                 askUserUseCase.userHasAnswer(_currentState!!.question.correctAnswer.id ,correctAnswer)
-                _state.value = if (correctAnswer) {
-                    ScreenState.CorrectAnswer(
+                if (correctAnswer) {
+                    ++rightAnswers
+                    _state.value = ScreenState.CorrectAnswer(
                         word = _currentState!!.question.question,
                         meaning = _currentState!!.question.correctAnswer.meaning,
                         examples = _currentState!!.question.correctAnswer.examples
                     )
                 }
                 else {
-                    ScreenState.WrongAnswer(
+                    _state.value = ScreenState.WrongAnswer(
                         word = _currentState!!.question.question,
                         meaning = _currentState!!.question.correctAnswer.meaning,
                         examples = _currentState!!.question.correctAnswer.examples
+                    )
+                }
+                if (allAnswers == 10){
+                    _state.value = ScreenState.TestIsFinished(
+                        correctAnswersCount = rightAnswers,
+                        totalAnswersCount = allAnswers
                     )
                 }
             }
@@ -59,5 +70,6 @@ sealed class ScreenState() {
     data class QuestionState(val question: Question): ScreenState()
     data class CorrectAnswer(val word: String, val meaning: String, val examples: String): ScreenState()
     data class WrongAnswer(val word: String, val meaning: String, val examples: String): ScreenState()
+    data class TestIsFinished(val correctAnswersCount: Int, val totalAnswersCount: Int): ScreenState()
 }
 
