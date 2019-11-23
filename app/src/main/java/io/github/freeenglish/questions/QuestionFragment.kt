@@ -5,11 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.AppCompatButton
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import io.github.freeenglish.R
-import androidx.transition.TransitionManager
 
 import io.github.freeenglish.ViewModels.QuestionsViewModel
 import io.github.freeenglish.ViewModels.ScreenState
@@ -47,7 +45,8 @@ class QuestionFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 is ScreenState.QuestionState -> updateQuestionState(it)
-                is ScreenState.Result -> updateNextState(it)
+                ScreenState.CorrectAnswer -> showCorrectAnswer()
+                is ScreenState.WrongAnswer -> showWrongAnswer(it)
             }
         }
     }
@@ -64,26 +63,29 @@ class QuestionFragment : Fragment() {
         }
     }
 
-
-
-    private fun updateNextState(resultState: ScreenState.Result) {
+    private fun showCorrectAnswer() {
         questionState.visibility = View.GONE
         nextState.visibility = View.VISIBLE
-        if (resultState.isRight){
-            answer_right.setImageDrawable(
-                ContextCompat.getDrawable(
-                    context!!, // Context
-                    R.drawable.answer_right // Drawable
-                )
+        answer_right.setImageDrawable(
+            ContextCompat.getDrawable(
+                context!!, // Context
+                R.drawable.answer_right // Drawable
             )
-        } else {
-            answer_right.setImageDrawable(
-                ContextCompat.getDrawable(
-                    context!!, // Context
-                    R.drawable.answer_wrong // Drawable
-                )
+        )
+    }
+
+    private fun showWrongAnswer(resultState: ScreenState.WrongAnswer) {
+        questionState.visibility = View.GONE
+        nextState.visibility = View.VISIBLE
+        descriptionNameplate.text = resultState.meaning + "\n" + resultState.examples
+        rightText.text = resultState.word
+        answer_right.setImageDrawable(
+            ContextCompat.getDrawable(
+                context!!, // Context
+                R.drawable.answer_wrong // Drawable
             )
-        }
+        )
+
     }
 
     private fun updateQuestionState(state: ScreenState.QuestionState) {
