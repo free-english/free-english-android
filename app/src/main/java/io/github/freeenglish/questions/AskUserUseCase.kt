@@ -20,7 +20,6 @@ data class Answer(
 interface AskUserUseCase {
     suspend fun askQuestion(): Question
     suspend fun userHasAnswered(rightDefinitionId: Long, isAnswerRight: Boolean)
-//    suspend fun chekRightAnswerts(userHasAnswered: Answer)
 }
 
 class AskUserUseCaseImplementation(
@@ -69,9 +68,6 @@ class AskUserUseCaseImplementation(
             ).sortedBy {Random.nextInt(0, 10)},
             correctAnswer = word.definitions[random]
         )
-
-
-
 
         return question
     }

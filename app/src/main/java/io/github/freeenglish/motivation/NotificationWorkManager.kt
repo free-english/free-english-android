@@ -3,21 +3,12 @@ package io.github.freeenglish.motivation
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.content.Context.NOTIFICATION_SERVICE
 import android.os.Build
-import android.util.Log
 import androidx.work.Worker
-import javax.xml.datatype.DatatypeConstants.MINUTES
-import androidx.work.PeriodicWorkRequest
-import java.util.concurrent.TimeUnit
-import androidx.annotation.NonNull
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
-
-import androidx.work.OneTimeWorkRequest
 import io.github.freeenglish.R
 import android.app.PendingIntent
 import android.content.Intent
@@ -26,8 +17,7 @@ import io.github.freeenglish.MainActivity
 
 class NotificationWorkManager(
     private val context: Context, params: WorkerParameters
-) :
-    Worker(context, params) {
+) : Worker(context, params) {
 
     companion object {
         private const val NOTIFY_ID = 1
@@ -62,9 +52,6 @@ class NotificationWorkManager(
         val notificationManager =
             NotificationManagerCompat.from(applicationContext)
         notificationManager.notify(NOTIFY_ID, builder.build())
-
-
-
 
         return Result.success()
     }
