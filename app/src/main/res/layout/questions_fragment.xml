@@ -9,13 +9,14 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/answer_right"
-        android:layout_width="312dp"
-        android:layout_height="530dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="30dp"
         android:src="@drawable/answer_right"
-        app:layout_constraintBottom_toTopOf="@id/nextButton"
+        app:layout_constraintBottom_toTopOf="@id/llayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/congrat" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button1"
@@ -130,7 +131,7 @@
         android:id="@+id/nextState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="nextButton,answer_right,llayout"
+        app:constraint_referenced_ids="nextButton,answer_right,llayout,congrat"
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -138,20 +139,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="143dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="142dp"
-        android:text="CONGRATS!"
         android:textColor="#E90606"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/answer_right"/>
 
     <LinearLayout
         android:id="@+id/llayout"
         android:layout_width="320dp"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         android:background="@drawable/button_border"
@@ -160,7 +162,6 @@
         app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answer_right"
         app:layout_constraintVertical_bias="1.0"
         tools:visibility="visible">
 

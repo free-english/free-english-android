@@ -47,6 +47,7 @@ class QuestionFragment : Fragment() {
                 is ScreenState.QuestionState -> updateQuestionState(it)
                 is ScreenState.CorrectAnswer -> showCorrectAnswer(it)
                 is ScreenState.WrongAnswer -> showWrongAnswer(it)
+                is ScreenState.TestIsFinished -> showResults(it)
             }
         }
     }
@@ -64,7 +65,7 @@ class QuestionFragment : Fragment() {
     }
 
     private fun showCorrectAnswer(resultState: ScreenState.CorrectAnswer) {
-        congrat.visibility = View.VISIBLE
+        congrat.text = getString(R.string.congrats)
         showAnswer(resultState.word, resultState.meaning, resultState.examples)
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
@@ -75,7 +76,7 @@ class QuestionFragment : Fragment() {
     }
 
     private fun showWrongAnswer(resultState: ScreenState.WrongAnswer) {
-        congrat.visibility = View.GONE
+        congrat.text = getString(R.string.almost)
         showAnswer(resultState.word, resultState.meaning, resultState.examples)
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
@@ -111,12 +112,12 @@ class QuestionFragment : Fragment() {
         }
     }
 
-    private fun showResults(correctAnswersCount: Int, totalAnswersCount: Int) {
+    private fun showResults(testResult: ScreenState.TestIsFinished) {
         parentFragmentManager
             .beginTransaction()
             .replace(
                 R.id.container,
-                QuestionResultFragment.newInstance(correctAnswersCount, totalAnswersCount)
+                QuestionResultFragment.newInstance(testResult.correctAnswersCount, testResult.totalAnswersCount)
             )
             .commit()
     }
