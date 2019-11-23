@@ -66,6 +66,9 @@ class QuestionFragment : Fragment() {
     private fun showCorrectAnswer(resultState: ScreenState.CorrectAnswer) {
         congrat.text = getString(R.string.congrats)
         congrat.setTextColor(ContextCompat.getColor(context!!, R.color.success))
+        rightText.setTextColor(ContextCompat.getColor(context!!, R.color.success))
+        nextButton.setTextColor(ContextCompat.getColor(context!!, R.color.success))
+
         showAnswer(resultState.word, resultState.meaning, resultState.examples, resultState.countAll)
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
@@ -78,6 +81,9 @@ class QuestionFragment : Fragment() {
     private fun showWrongAnswer(resultState: ScreenState.WrongAnswer) {
         congrat.text = getString(R.string.almost)
         congrat.setTextColor(ContextCompat.getColor(context!!, R.color.error))
+        rightText.setTextColor(ContextCompat.getColor(context!!, R.color.error))
+        nextButton.setTextColor(ContextCompat.getColor(context!!, R.color.error))
+
         showAnswer(resultState.word, resultState.meaning, resultState.examples, resultState.countAll)
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
