@@ -95,12 +95,14 @@ class InProgressAdapter(val items: ArrayList<DefinitionInProgress>, val context:
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.tvWord?.text =items[position].word
         holder.tvMeaning?.text = items[position].meaning
         holder.pbProgress.progress = items[position].progress
     }
 }
 
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    val tvWord = view.tvWord
     val tvMeaning = view.tvMeaning
     val pbProgress = view.pbProgres
 }

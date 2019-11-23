@@ -56,7 +56,7 @@ class AskUserUseCaseImplementation(
         } else {
             definition.copy(
                 correctAnswerInTheRow = 0,
-                progress = definition.progress + 10
+                progress = definition.progress + 5
             )
         }
         questionsDao.updateDefinition(upatedDefinition)
