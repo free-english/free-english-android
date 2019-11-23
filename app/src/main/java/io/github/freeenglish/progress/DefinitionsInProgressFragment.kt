@@ -61,9 +61,14 @@ class DefinitionsInProgressFragment : Fragment() {
                         it.progress
                     )
                 )
-                definitions.sortedBy { it.progress }
+
             }
-            recyclerView.adapter = InProgressAdapter(definitionsInProgressList, context!!)
+
+            recyclerView.adapter =
+                InProgressAdapter(
+                    definitionsInProgressList.sortedBy { it.progress * -1 },
+                    context!!
+                )
         }
         view.findViewById<Button>(R.id.btnBack).setOnClickListener {
             activity?.onBackPressed()
@@ -77,7 +82,7 @@ data class DefinitionInProgress(
     val progress: Int
 )
 
-class InProgressAdapter(val items: ArrayList<DefinitionInProgress>, val context: Context) :
+class InProgressAdapter(val items: List<DefinitionInProgress>, val context: Context) :
     RecyclerView.Adapter<ViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -95,7 +100,7 @@ class InProgressAdapter(val items: ArrayList<DefinitionInProgress>, val context:
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvWord?.text =items[position].word
+        holder.tvWord?.text = items[position].word
         holder.tvMeaning?.text = items[position].meaning
         holder.pbProgress.progress = items[position].progress
     }
