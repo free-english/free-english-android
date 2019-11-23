@@ -47,6 +47,7 @@ class QuestionFragment : Fragment() {
                 is ScreenState.QuestionState -> updateQuestionState(it)
                 is ScreenState.CorrectAnswer -> showCorrectAnswer(it)
                 is ScreenState.WrongAnswer -> showWrongAnswer(it)
+                is ScreenState.TestIsFinished -> showResults(it)
             }
         }
     }
@@ -111,12 +112,12 @@ class QuestionFragment : Fragment() {
         }
     }
 
-    private fun showResults(correctAnswersCount: Int, totalAnswersCount: Int) {
+    private fun showResults(testResult: ScreenState.TestIsFinished) {
         parentFragmentManager
             .beginTransaction()
             .replace(
                 R.id.container,
-                QuestionResultFragment.newInstance(correctAnswersCount, totalAnswersCount)
+                QuestionResultFragment.newInstance(testResult.correctAnswersCount, testResult.totalAnswersCount)
             )
             .commit()
     }
