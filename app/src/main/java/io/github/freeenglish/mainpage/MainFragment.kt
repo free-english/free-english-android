@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import io.github.freeenglish.R
 import io.github.freeenglish.data.AppDatabase
 import io.github.freeenglish.motivation.UserStatDao
+import io.github.freeenglish.progress.DefinitionsInProgressFragment
 import io.github.freeenglish.questions.QuestionFragment
 import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.android.synthetic.main.questions_fragment.*
@@ -20,7 +21,6 @@ class MainFragment : Fragment() {
     }
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,6 +28,7 @@ class MainFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         lifecycleScope.launchWhenCreated {
             val appDataBase = AppDatabase.getInstance(context!!).statDao()
@@ -46,6 +47,12 @@ class MainFragment : Fragment() {
                 .replace(R.id.container, QuestionFragment.newInstance())
                 .commit()
 
+        }
+        checkStatsBtn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.container, DefinitionsInProgressFragment.newInstance())
+                .addToBackStack("DefinitionsInProgressFragment")
+                .commit()
         }
     }
 }

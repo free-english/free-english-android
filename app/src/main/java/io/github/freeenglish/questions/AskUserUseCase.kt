@@ -47,11 +47,17 @@ class AskUserUseCaseImplementation(
         rightDefinitionId: Long,
         isAnswerRight: Boolean
     ) {
-        var definition = questionsDao.getDefinition(rightDefinitionId)
+        val definition = questionsDao.getDefinition(rightDefinitionId)
         val upatedDefinition = if (isAnswerRight) {
-            definition.copy(correctAnswerInTheRow = definition.correctAnswerInTheRow + 1)
+            definition.copy(
+                correctAnswerInTheRow = definition.correctAnswerInTheRow + 1,
+                progress = definition.progress + 10
+            )
         } else {
-            definition.copy(correctAnswerInTheRow = 0)
+            definition.copy(
+                correctAnswerInTheRow = 0,
+                progress = definition.progress + 10
+            )
         }
         questionsDao.updateDefinition(upatedDefinition)
     }

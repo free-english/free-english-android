@@ -21,5 +21,6 @@ data class Definition(
     @ColumnInfo(name = "word_id") val wordId: Long,
     val meaning: String,
     val examples: String,
-    val correctAnswerInTheRow: Int = 0
+    val correctAnswerInTheRow: Int = 0,
+    val progress: Int = 0
 )

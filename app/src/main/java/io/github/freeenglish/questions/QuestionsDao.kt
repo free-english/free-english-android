@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Update
 import io.github.freeenglish.data.entities.Definition
+import io.github.freeenglish.data.entities.Word
 import io.github.freeenglish.data.entities.WordAndDefinitions
 
 @Dao
@@ -22,5 +23,8 @@ interface QuestionsDao {
 
     @Update
     suspend fun updateDefinition(definitions: Definition)
+
+    @Query("SELECT * FROM words WHERE id IN (:idsList)")
+    suspend fun getWordWithDefinitions(idsList: List<Long>): List<Word>
 
 }
