@@ -46,12 +46,6 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 
                     )
                 }
-                if (allAnswers == 10){
-                    _state.value = ScreenState.TestIsFinished(
-                        correctAnswersCount = rightAnswers,
-                        totalAnswersCount = allAnswers
-                    )
-                }
             }
         }
 
@@ -60,10 +54,16 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 
     fun onNextClick() {
         viewModelScope.launch {
-            val state = ScreenState.QuestionState(askUserUseCase.askQuestion())
-            _state.value = state
-            _currentState = state
-
+            if (allAnswers == 10){
+                _state.value = ScreenState.TestIsFinished(
+                    correctAnswersCount = rightAnswers,
+                    totalAnswersCount = allAnswers
+                )
+            } else {
+                val state = ScreenState.QuestionState(askUserUseCase.askQuestion())
+                _state.value = state
+                _currentState = state
+            }
         }
     }
 }
