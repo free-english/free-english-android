@@ -19,7 +19,6 @@ data class Answer(
 
 interface AskUserUseCase {
     suspend fun askQuestion(): Question
-    suspend fun checkAnswer(isAnswerRight: Boolean): Boolean
     suspend fun userHasAnswer(rightDefinitionId: Long, isAnswerRight: Boolean)
 //    suspend fun chekRightAnswerts(userHasAnswer: Answer)
 }
@@ -27,9 +26,6 @@ interface AskUserUseCase {
 class AskUserUseCaseImplementation(
     private val questionsDao: QuestionsDao
 ) : AskUserUseCase {
-
-
-
 
     override suspend fun askQuestion(): Question {
         val word = questionsDao.getRandWord()
