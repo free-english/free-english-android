@@ -36,11 +36,20 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_border"
+        android:elevation="6dp"
+        android:stateListAnimator="@null"
+        android:text="DONE"
+        android:textColor="#F10606"
+        android:textSize="24sp"
+        android:translationZ="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="606dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:layout_width="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
