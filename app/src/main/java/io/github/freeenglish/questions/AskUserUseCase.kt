@@ -34,7 +34,7 @@ class AskUserUseCaseImplementation(
             val randomValue = List(1) { Random.nextInt(0, word.definitions.size - 1) }
             random = randomValue[0]
         }
-        val definitionsScope = questionsDao.getScopeOfWrongDef(word.definitions[random].id)
+        val definitionsScope = questionsDao.getScopeOfWrongDef(word.word.id)
         return generateQuestion(word, random, definitionsScope)
     }
 
@@ -51,7 +51,7 @@ class AskUserUseCaseImplementation(
             definition = definition.copy(correctAnswerInTheRow = 0)
         }
 
-        return questionsDao.updateDefinition(definition)
+         questionsDao.updateDefinition(definition)
     }
 
 
@@ -70,6 +70,9 @@ class AskUserUseCaseImplementation(
             ).sortedBy {Random.nextInt(0, 10)},
             correctAnswer = word.definitions[random]
         )
+
+
+
 
         return question
     }

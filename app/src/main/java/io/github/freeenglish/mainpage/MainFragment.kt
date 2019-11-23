@@ -27,7 +27,6 @@ class MainFragment : Fragment() {
         startTestButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.container, QuestionFragment.newInstance())
-                .addToBackStack("question")
                 .commit()
         }
     }

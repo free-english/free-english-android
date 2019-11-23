@@ -1,14 +1,14 @@
 package io.github.freeenglish.questions
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import io.github.freeenglish.R
-
 import io.github.freeenglish.ViewModels.QuestionsViewModel
 import io.github.freeenglish.ViewModels.ScreenState
 import io.github.freeenglish.data.AppDatabase
@@ -45,7 +45,7 @@ class QuestionFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 is ScreenState.QuestionState -> updateQuestionState(it)
-                ScreenState.CorrectAnswer -> showCorrectAnswer()
+                is ScreenState.CorrectAnswer -> showCorrectAnswer(it)
                 is ScreenState.WrongAnswer -> showWrongAnswer(it)
             }
         }
@@ -63,9 +63,9 @@ class QuestionFragment : Fragment() {
         }
     }
 
-    private fun showCorrectAnswer() {
-        questionState.visibility = View.GONE
-        nextState.visibility = View.VISIBLE
+    private fun showCorrectAnswer(resultState: ScreenState.CorrectAnswer) {
+        congrat.visibility = View.VISIBLE
+        showAnswer(resultState.word, resultState.meaning, resultState.examples)
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
                 context!!, // Context
@@ -75,10 +75,8 @@ class QuestionFragment : Fragment() {
     }
 
     private fun showWrongAnswer(resultState: ScreenState.WrongAnswer) {
-        questionState.visibility = View.GONE
-        nextState.visibility = View.VISIBLE
-        descriptionNameplate.text = resultState.meaning + "\n" + resultState.examples
-        rightText.text = resultState.word
+        congrat.visibility = View.GONE
+        showAnswer(resultState.word, resultState.meaning, resultState.examples)
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
                 context!!, // Context
@@ -87,6 +85,15 @@ class QuestionFragment : Fragment() {
         )
 
     }
+
+    private fun showAnswer(word: String, meaning: String, examples: String) {
+        questionState.visibility = View.GONE
+        nextState.visibility = View.VISIBLE
+        descriptionNameplate.text = meaning + "\n" + examples
+        rightText.text = word
+    }
+
+
 
     private fun updateQuestionState(state: ScreenState.QuestionState) {
         nextState.visibility = View.GONE
@@ -104,5 +111,14 @@ class QuestionFragment : Fragment() {
         }
     }
 
+    private fun showResults(correctAnswersCount: Int, totalAnswersCount: Int) {
+        parentFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.container,
+                QuestionResultFragment.newInstance(correctAnswersCount, totalAnswersCount)
+            )
+            .commit()
+    }
 
 }
