@@ -10,53 +10,16 @@
            android:id="@+id/startTestButton"
            android:layout_width="match_parent"
            android:layout_height="65dp"
-           android:background="#C51D51"
-           android:text="@string/take_the_test"
-           android:textColor="#FFFFFF"
-           android:textSize="19sp"
            android:layout_margin="25dp"
+           android:background="#FFFFFF"
+           android:text="@string/take_the_test"
+           android:textColor="#F10606"
+           android:textSize="19sp"
            app:layout_constraintBottom_toBottomOf="parent" />
 
 
-       <TextView
-           android:id="@+id/words_in_db"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="20dp"
-           android:textSize="22pt"
-           tools:text="/100"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.5"
-           app:layout_constraintStart_toEndOf="@+id/user_vocabulary"
-           app:layout_constraintTop_toBottomOf="@+id/my_total_progress_textView" />
-
-       <TextView
-           android:id="@+id/user_vocabulary"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="20dp"
-           tools:text="0"
-           android:textColor="#B70000"
-           android:textSize="22pt"
-           app:layout_constraintEnd_toStartOf="@+id/words_in_db"
-           app:layout_constraintHorizontal_chainStyle="packed"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/my_total_progress_textView" />
-
-       <TextView
-           android:id="@+id/my_total_progress_textView"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="40dp"
-           android:text="@string/my_total_progress"
-           android:textColor="#000000"
-           android:textSize="24sp"
-           android:textStyle="bold"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent" />
-
        <androidx.cardview.widget.CardView
+           android:id="@+id/cardView"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginStart="32dp"
@@ -84,10 +47,12 @@
                      <TextView
                          android:id="@+id/day_word"
                          android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text=""
-                         android:textSize="24sp"
+                         android:layout_height="50dp"
                          android:layout_gravity="center"
+                         android:layout_marginTop="20dp"
+                         android:text="GET BENT"
+                         android:textColor="#000000"
+                         android:textSize="24sp"
                          android:textStyle="bold" />
 
 
@@ -95,13 +60,100 @@
                          android:id="@+id/example"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:layout_marginTop="25dp"
-                         android:text="example"
                          android:layout_gravity="center"
+                         android:layout_marginTop="10dp"
+                         android:text="Crowley: I don't\n need your help.\nGet bent, Moose."
                          android:textSize="24sp"
                          android:textStyle="italic" />
+
               </LinearLayout>
 
        </androidx.cardview.widget.CardView>
+
+       <!--       <LinearLayout-->
+       <!--           android:layout_width="match_parent"-->
+       <!--           android:layout_height="70dp"-->
+       <!--           android:layout_marginStart="100dp"-->
+       <!--           android:layout_marginEnd="100dp"-->
+       <!--           android:orientation="horizontal"-->
+       <!--           app:layout_constraintEnd_toEndOf="parent"-->
+       <!--           app:layout_constraintStart_toStartOf="parent"-->
+       <!--           tools:layout_editor_absoluteY="520dp"-->
+       <!--           tools:ignore="MissingConstraints">-->
+
+       <TextView
+           android:id="@+id/user_vocabulary"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:textColor="#B70000"
+           android:textSize="22pt"
+           android:textStyle="bold"
+           app:layout_constraintBottom_toTopOf="@+id/startTestButton"
+           app:layout_constraintEnd_toStartOf="@+id/words_in_db"
+           app:layout_constraintHorizontal_chainStyle="packed"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/cardView"
+           tools:text="0" />
+
+       <TextView
+           android:id="@+id/words_in_db"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:textColor="#E4E4E4"
+           android:textSize="22pt"
+           android:textStyle="bold"
+           app:layout_constraintBottom_toTopOf="@+id/startTestButton"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.5"
+           app:layout_constraintStart_toEndOf="@+id/user_vocabulary"
+           app:layout_constraintTop_toBottomOf="@+id/cardView"
+           tools:text=" / 56" />
+
+       <TextView
+           android:id="@+id/learned"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="31dp"
+           android:layout_marginBottom="8dp"
+           android:text="LEARNED"
+           android:textColor="#E4E4E4"
+           android:textSize="24sp"
+           android:textStyle="bold"
+           app:layout_constraintBottom_toTopOf="@+id/user_vocabulary"
+           app:layout_constraintEnd_toStartOf="@+id/words_in_db"
+           app:layout_constraintHorizontal_bias="1.0"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+       <TextView
+           android:id="@+id/total"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="55dp"
+           android:layout_marginTop="32dp"
+           android:layout_marginBottom="8dp"
+           android:text="TOTAL"
+           android:textColor="#E4E4E4"
+           android:textSize="24sp"
+           android:textStyle="bold"
+           app:layout_constraintBottom_toTopOf="@+id/words_in_db"
+           app:layout_constraintStart_toStartOf="@+id/words_in_db"
+           app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+       <ImageView
+           android:id="@+id/imageView3"
+           android:layout_width="326dp"
+           android:layout_height="193dp"
+           android:layout_marginTop="8dp"
+           app:layout_constraintBottom_toTopOf="@+id/cardView"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.494"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           app:srcCompat="@drawable/ic_intro_logo_3_01" />
+
+       <!--       </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
