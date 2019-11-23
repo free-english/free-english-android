@@ -66,7 +66,7 @@ class QuestionFragment : Fragment() {
 
     private fun showCorrectAnswer(resultState: ScreenState.CorrectAnswer) {
         congrat.text = getString(R.string.congrats)
-        showAnswer(resultState.word, resultState.meaning, resultState.examples)
+        showAnswer(resultState.word, resultState.meaning, resultState.examples, resultState.countAll)
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
                 context!!, // Context
@@ -77,7 +77,7 @@ class QuestionFragment : Fragment() {
 
     private fun showWrongAnswer(resultState: ScreenState.WrongAnswer) {
         congrat.text = getString(R.string.almost)
-        showAnswer(resultState.word, resultState.meaning, resultState.examples)
+        showAnswer(resultState.word, resultState.meaning, resultState.examples, resultState.countAll)
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
                 context!!, // Context
@@ -87,11 +87,13 @@ class QuestionFragment : Fragment() {
 
     }
 
-    private fun showAnswer(word: String, meaning: String, examples: String) {
+    private fun showAnswer(word: String, meaning: String, examples: String, progressStatus: Int) {
         questionState.visibility = View.GONE
         nextState.visibility = View.VISIBLE
         descriptionNameplate.text = meaning + "\n" + examples
         rightText.text = word
+
+        pb_test.progress = progressStatus
     }
 
 
