@@ -65,7 +65,7 @@ class QuestionFragment : Fragment() {
     }
 
     private fun showCorrectAnswer(resultState: ScreenState.CorrectAnswer) {
-        congrat.visibility = View.VISIBLE
+        congrat.text = getString(R.string.congrats)
         showAnswer(resultState.word, resultState.meaning, resultState.examples)
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
@@ -76,7 +76,7 @@ class QuestionFragment : Fragment() {
     }
 
     private fun showWrongAnswer(resultState: ScreenState.WrongAnswer) {
-        congrat.visibility = View.GONE
+        congrat.text = getString(R.string.almost)
         showAnswer(resultState.word, resultState.meaning, resultState.examples)
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
