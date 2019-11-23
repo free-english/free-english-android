@@ -1,6 +1,4 @@
 package io.github.freeenglish.data.sync
-
-import android.app.Application
 import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
@@ -14,11 +12,7 @@ const val FILE_PATH = "questions.json"
 
 suspend fun initDataBase(context: Context) {
 
-
-
-    val assetsManager =context.assets
-
-
+    val assetsManager = context.assets
     assetsManager.open(FILE_PATH).use { inputStream ->
         JsonReader(inputStream.reader()).use { jsonReader ->
             val plantType = object : TypeToken<List<Definitions>>() {}.type
