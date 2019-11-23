@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 )
 data class Word(
     @PrimaryKey val id: Long,
-    val value: String
+    val value: String,
+    var priority: Int = 0
 )

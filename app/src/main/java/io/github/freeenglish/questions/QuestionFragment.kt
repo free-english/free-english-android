@@ -1,4 +1,5 @@
 package io.github.freeenglish.questions
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +25,13 @@ class QuestionFragment : Fragment() {
     }
 
     private val viewModel: QuestionsViewModel by viewModels {
-        QuestionsViewModel(AskUserUseCaseImplementation(AppDatabase.getInstance(context!!).questionsDao()))
+        val appDatabase = AppDatabase.getInstance(context!!)
+        QuestionsViewModel(
+            AskUserUseCaseImplementation(
+                appDatabase.questionsDao(),
+                appDatabase.dataSyncDao()
+            )
+        )
     }
 
     override fun onCreateView(
@@ -69,7 +76,12 @@ class QuestionFragment : Fragment() {
         rightText.setTextColor(ContextCompat.getColor(context!!, R.color.success))
         nextButton.setTextColor(ContextCompat.getColor(context!!, R.color.success))
 
-        showAnswer(resultState.word, resultState.meaning, resultState.examples, resultState.countAll)
+        showAnswer(
+            resultState.word,
+            resultState.meaning,
+            resultState.examples,
+            resultState.countAll
+        )
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
                 context!!, // Context
@@ -84,7 +96,12 @@ class QuestionFragment : Fragment() {
         rightText.setTextColor(ContextCompat.getColor(context!!, R.color.error))
         nextButton.setTextColor(ContextCompat.getColor(context!!, R.color.error))
 
-        showAnswer(resultState.word, resultState.meaning, resultState.examples, resultState.countAll)
+        showAnswer(
+            resultState.word,
+            resultState.meaning,
+            resultState.examples,
+            resultState.countAll
+        )
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
                 context!!, // Context
@@ -102,7 +119,6 @@ class QuestionFragment : Fragment() {
 
         pb_test.progress = progressStatus
     }
-
 
 
     private fun updateQuestionState(state: ScreenState.QuestionState) {
@@ -126,7 +142,10 @@ class QuestionFragment : Fragment() {
             .beginTransaction()
             .replace(
                 R.id.container,
-                QuestionResultFragment.newInstance(testResult.correctAnswersCount, testResult.totalAnswersCount)
+                QuestionResultFragment.newInstance(
+                    testResult.correctAnswersCount,
+                    testResult.totalAnswersCount
+                )
             )
             .commit()
     }

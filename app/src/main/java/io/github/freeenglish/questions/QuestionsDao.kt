@@ -1,8 +1,6 @@
 package io.github.freeenglish.questions
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import io.github.freeenglish.data.entities.Definition
 import io.github.freeenglish.data.entities.Word
 import io.github.freeenglish.data.entities.WordAndDefinitions
@@ -11,6 +9,12 @@ import io.github.freeenglish.data.entities.WordAndDefinitions
 interface QuestionsDao {
     @Query("SELECT * FROM words ORDER BY RANDOM() LIMIT 1")
     suspend fun getWordWithDefinitions(): WordAndDefinitions
+
+    @Query("SELECT * FROM words WHERE priority > 0 AND priority < 100 LIMIT 7")
+    suspend fun getPrioredWord(): List<WordAndDefinitions>
+
+    @Query("SELECT * FROM words WHERE priority = 0 LIMIT :limit")
+    suspend fun getNotPriored(limit: Int): List<WordAndDefinitions>
 
     @Query("SELECT * FROM words ORDER BY RANDOM() LIMIT 1")
     suspend fun getRandWord(): WordAndDefinitions
@@ -26,5 +30,8 @@ interface QuestionsDao {
 
     @Query("SELECT * FROM words WHERE id IN (:idsList)")
     suspend fun getWordWithDefinitions(idsList: List<Long>): List<Word>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertWord(word: Word)
 
 }

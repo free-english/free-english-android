@@ -11,6 +11,9 @@ interface DataSyncDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWords(words: List<Word>)
 
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateWords(words: List<Word>)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDefinitions(definitions: List<Definition>)
 

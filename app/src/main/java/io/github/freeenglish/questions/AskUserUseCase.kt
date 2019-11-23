@@ -1,11 +1,14 @@
 package io.github.freeenglish.questions
 
 import io.github.freeenglish.data.entities.Definition
+import io.github.freeenglish.data.entities.Word
 import io.github.freeenglish.data.entities.WordAndDefinitions
+import io.github.freeenglish.data.sync.DataSyncDao
 import kotlin.random.Random
 
 data class Question(
     val id: Long,
+    val wordId: Long,
     val question: String,
     val answers: List<Answer>,
     val correctAnswer: CorrectAnswer
@@ -23,23 +26,35 @@ data class CorrectAnswer(
 )
 
 interface AskUserUseCase {
-    suspend fun askQuestion(): Question
+    suspend fun askQuestionsList(): List<Question>
     suspend fun userHasAnswered(rightDefinitionId: Long, isAnswerRight: Boolean)
+    suspend fun updatePriorities(idsList: List<Long>)
 }
 
+const val testImtesSize: Int = 10
+
 class AskUserUseCaseImplementation(
-    private val questionsDao: QuestionsDao
+    private val questionsDao: QuestionsDao,
+    private val dataSyncDao: DataSyncDao
 ) : AskUserUseCase {
 
-    override suspend fun askQuestion(): Question {
-        val word = questionsDao.getRandWord()
-        var random = 0
-        if (word.definitions.size > 1) {
-            val randomValue = List(1) { Random.nextInt(0, word.definitions.size - 1) }
-            random = randomValue[0]
+    override suspend fun askQuestionsList(): List<Question> {
+        val resultList = mutableListOf<Question>()
+        val allWordsAndDefinitions = mutableListOf<WordAndDefinitions>()
+        val priored = questionsDao.getPrioredWord()
+        val notPriored = questionsDao.getNotPriored(testImtesSize - priored.size)
+        val randomCount = testImtesSize - priored.size - notPriored.size
+        if (randomCount != 0)
+            for (i in 0..randomCount) {
+                allWordsAndDefinitions.add(questionsDao.getRandWord())
+            }
+        allWordsAndDefinitions.addAll(priored)
+        allWordsAndDefinitions.addAll(notPriored)
+        allWordsAndDefinitions.shuffle()
+        allWordsAndDefinitions.forEach {
+            resultList.add(getFromWordAndDefinitions(it))
         }
-        val definitionsScope = questionsDao.getScopeOfWrongDef(word.word.id)
-        return generateQuestion(word, random, definitionsScope)
+        return resultList
     }
 
 
@@ -62,8 +77,17 @@ class AskUserUseCaseImplementation(
         questionsDao.updateDefinition(upatedDefinition)
     }
 
+    override suspend fun updatePriorities(idsList: List<Long>) {
+        val words = questionsDao.getWordWithDefinitions(idsList)
+        val rezList = mutableListOf<Word>()
 
-    fun generateQuestion(
+        words.forEach {
+            rezList.add(it.copy(priority = it.priority + 10))
+        }
+        dataSyncDao.updateWords(rezList)
+    }
+
+    private fun generateQuestion(
         word: WordAndDefinitions,
         random: Int,
         defScope: List<Definition>
@@ -71,6 +95,7 @@ class AskUserUseCaseImplementation(
         val definition = word.definitions[random]
         return Question(
             id = definition.id,
+            wordId = word.word.id,
             question = word.word.value,
             answers = listOf(
                 Answer(definition.id, definition.meaning),
@@ -85,5 +110,15 @@ class AskUserUseCaseImplementation(
                 examples = definition.examples
             )
         )
+    }
+
+    private suspend fun getFromWordAndDefinitions(word: WordAndDefinitions): Question {
+        var random = 0
+        if (word.definitions.size > 1) {
+            val randomValue = List(1) { Random.nextInt(0, word.definitions.size - 1) }
+            random = randomValue[0]
+        }
+        val definitionsScope = questionsDao.getScopeOfWrongDef(word.word.id)
+        return generateQuestion(word, random, definitionsScope)
     }
 }
