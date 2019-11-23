@@ -17,6 +17,10 @@ interface DataSyncDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDefinitions(definitions: List<Definition>)
 
+    @Query("SELECT * FROM words WHERE priority>0")
+    suspend fun getAllPriored(): List<Word>
+
+
     @Transaction
     suspend fun setupInitialData(words: List<Word>, definitions: List<Definition>) {
         insertWords(words)

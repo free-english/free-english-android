@@ -3,11 +3,14 @@ package io.github.freeenglish
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.OneTimeWorkRequest
+import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import io.github.freeenglish.data.AppDatabase
 import io.github.freeenglish.data.entities.Word
 import io.github.freeenglish.mainpage.MainFragment
+import io.github.freeenglish.motivation.DropPriorityWorker
 import io.github.freeenglish.motivation.NotificationWorkManager
 import io.github.freeenglish.questions.QuestionFragment
 import java.util.concurrent.TimeUnit
@@ -20,7 +23,16 @@ class MainActivity : AppCompatActivity() {
         val builder = OneTimeWorkRequest.Builder(NotificationWorkManager::class.java)
         builder.setInitialDelay(5, TimeUnit.SECONDS)
         val myWorkRequest = builder.build()
-        WorkManager.getInstance(this.applicationContext).enqueue(myWorkRequest)
+        val dropPriorityWorker =
+            PeriodicWorkRequest.Builder(DropPriorityWorker::class.java, 24, TimeUnit.HOURS).build()
+        val workManager = WorkManager.getInstance(this.applicationContext)
+        workManager.enqueue(myWorkRequest)
+        workManager.enqueueUniquePeriodicWork(
+            "",
+            ExistingPeriodicWorkPolicy.REPLACE,
+            dropPriorityWorker
+        )
+
 
         //TODO Used after presentation
 //        val builder = PeriodicWorkRequest.Builder(NotificationWorkManager::class.java,24,TimeUnit.HOURS)
