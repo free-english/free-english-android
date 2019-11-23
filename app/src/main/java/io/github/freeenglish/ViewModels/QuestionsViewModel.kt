@@ -23,6 +23,7 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
         viewModelScope.launch {
             if (_currentState != null && _currentState!!.question.answers.size > answerPos) {
                 val correctAnswer = _currentState!!.question.correctAnswer.id == _currentState!!.question.answers[answerPos].id
+                askUserUseCase.userHasAnswer(_currentState!!.question.correctAnswer.id ,correctAnswer)
                 _state.value = if (correctAnswer) {
                     ScreenState.CorrectAnswer(
                         word = _currentState!!.question.question,
