@@ -1,14 +1,14 @@
 package io.github.freeenglish.questions
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import io.github.freeenglish.R
-
 import io.github.freeenglish.ViewModels.QuestionsViewModel
 import io.github.freeenglish.ViewModels.ScreenState
 import io.github.freeenglish.data.AppDatabase
@@ -104,5 +104,14 @@ class QuestionFragment : Fragment() {
         }
     }
 
+    private fun showResults(correctAnswersCount: Int, totalAnswersCount: Int) {
+        parentFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.container,
+                QuestionResultFragment.newInstance(correctAnswersCount, totalAnswersCount)
+            )
+            .commit()
+    }
 
 }
