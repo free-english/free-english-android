@@ -20,5 +20,6 @@ data class Definition(
     @PrimaryKey(autoGenerate = true) val id: Long,
     @ColumnInfo(name = "word_id") val wordId: Long,
     val meaning: String,
-    val examples: String
+    val examples: String,
+    val correctAnswerInTheRow: Int = 0
 )

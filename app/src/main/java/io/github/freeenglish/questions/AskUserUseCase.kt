@@ -2,6 +2,7 @@ package io.github.freeenglish.questions
 
 import io.github.freeenglish.data.entities.Definition
 import io.github.freeenglish.data.entities.WordAndDefinitions
+import io.github.freeenglish.data.sync.DataSyncDao_Impl
 import kotlin.random.Random
 
 data class Question(
@@ -18,6 +19,8 @@ data class Answer(
 
 interface AskUserUseCase {
     suspend fun askQuestion(): Question
+    suspend fun userHasAnswer(rightDefinitionId: Long, isAnswerRight: Boolean)
+//    suspend fun chekRightAnswerts(userHasAnswer: Answer)
 }
 
 class AskUserUseCaseImplementation(
@@ -34,6 +37,23 @@ class AskUserUseCaseImplementation(
         val definitionsScope = questionsDao.getScopeOfWrongDef(word.definitions[random].id)
         return generateQuestion(word, random, definitionsScope)
     }
+
+
+    override suspend fun userHasAnswer(
+        rightDefinitionId: Long,
+        isAnswerRight: Boolean
+    ){
+        var definition = questionsDao.getDefinition(rightDefinitionId)
+        if (isAnswerRight) {
+            definition = definition.copy(correctAnswerInTheRow = definition.correctAnswerInTheRow + 1)
+        }
+        else {
+            definition = definition.copy(correctAnswerInTheRow = 0)
+        }
+
+        return questionsDao.updateDefinition(definition)
+    }
+
 
 
     fun generateQuestion(word: WordAndDefinitions, random: Int, defScope: List<Definition>): Question {

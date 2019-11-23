@@ -4,16 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.work.OneTimeWorkRequest
-import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import io.github.freeenglish.data.AppDatabase
 import io.github.freeenglish.data.entities.Word
-import io.github.freeenglish.data.sync.initDataBase
+import io.github.freeenglish.mainpage.MainFragment
 import io.github.freeenglish.motivation.NotificationWorkManager
 import io.github.freeenglish.questions.QuestionFragment
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -41,8 +37,8 @@ class MainActivity : AppCompatActivity() {
                     if (t != null) {
                         window.setBackgroundDrawableResource(R.color.white)
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, QuestionFragment.newInstance())
-                            .commitNow()
+                            .replace(R.id.container, MainFragment.newInstance())
+                            .commit()
                         wordLiveData.removeObserver(this)
                     }
                 }

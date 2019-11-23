@@ -2,6 +2,7 @@ package io.github.freeenglish.questions
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Update
 import io.github.freeenglish.data.entities.Definition
 import io.github.freeenglish.data.entities.WordAndDefinitions
 
@@ -15,4 +16,11 @@ interface QuestionsDao {
 
     @Query("SELECT * FROM definitions WHERE id <> :descId  ORDER BY RANDOM() LIMIT 3")
     suspend fun getScopeOfWrongDef(descId: Long): List<Definition>
+
+    @Query("SELECT * FROM definitions WHERE id <> :rightDefinitionId LIMIT 3")
+    suspend fun getDefinition(rightDefinitionId: Long): Definition
+
+    @Update
+    suspend fun updateDefinition(definitions: Definition)
+
 }
