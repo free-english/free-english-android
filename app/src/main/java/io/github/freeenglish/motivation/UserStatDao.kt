@@ -9,5 +9,8 @@ import io.github.freeenglish.data.entities.Word
 @Dao
 interface UserStatDao {
     @Query("SELECT COUNT() FROM definitions")
-    suspend fun  getAllDifinitions(): Long
+    suspend fun  getAllDifinitionsCount(): Long
+
+    @Query("SELECT COUNT() FROM definitions WHERE correctAnswerInTheRow >=1 ")
+    suspend fun  getUserVocaburyCount(): Long
 }
