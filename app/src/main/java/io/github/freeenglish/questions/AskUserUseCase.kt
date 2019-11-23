@@ -19,8 +19,8 @@ data class Answer(
 
 interface AskUserUseCase {
     suspend fun askQuestion(): Question
-    suspend fun userHasAnswer(rightDefinitionId: Long, isAnswerRight: Boolean)
-//    suspend fun chekRightAnswerts(userHasAnswer: Answer)
+    suspend fun userHasAnswered(rightDefinitionId: Long, isAnswerRight: Boolean)
+//    suspend fun chekRightAnswerts(userHasAnswered: Answer)
 }
 
 class AskUserUseCaseImplementation(
@@ -39,7 +39,7 @@ class AskUserUseCaseImplementation(
     }
 
 
-    override suspend fun userHasAnswer(
+    override suspend fun userHasAnswered(
         rightDefinitionId: Long,
         isAnswerRight: Boolean
     ){

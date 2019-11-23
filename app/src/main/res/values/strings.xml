@@ -2,5 +2,6 @@
     <string name="app_name">Free English</string>
     <string name="take_the_test">TAKE THE TEST</string>
     <string name="congrats">CONGRATS!</string>
-    <string name="almost">ALMOST DID IT…</string>
+    <string name="almost">ALMOST DID IT...</string>
+    <string name="my_total_progress">MY TOTAL PROGRESS</string>
 </resources>

@@ -37,5 +37,8 @@ class QuestionResultFragment : Fragment() {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance()).commit()
         }
+        val correctAnswers = arguments?.getInt(CORRECT_ANSWERS_COUNT) ?: 0
+        val totalAnswers = arguments?.getInt(TOTAL_ANSWERS_COUNT) ?: 0
+        score_total.text = "$correctAnswers / $totalAnswers"
     }
 }

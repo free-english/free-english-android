@@ -27,7 +27,7 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
             if (_currentState != null && _currentState!!.question.answers.size > answerPos) {
                 ++allAnswers
                 val correctAnswer = _currentState!!.question.correctAnswer.id == _currentState!!.question.answers[answerPos].id
-                askUserUseCase.userHasAnswer(_currentState!!.question.correctAnswer.id, correctAnswer)
+                askUserUseCase.userHasAnswered(_currentState!!.question.correctAnswer.id, correctAnswer)
                 if (correctAnswer) {
                     ++rightAnswers
                     _state.value = ScreenState.CorrectAnswer(
