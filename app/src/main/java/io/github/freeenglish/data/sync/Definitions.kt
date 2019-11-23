@@ -1,7 +1,6 @@
 package io.github.freeenglish.data.sync
 
 import com.google.gson.annotations.SerializedName
-import com.squareup.moshi.Json
 
 data class Definitions(
     @SerializedName("value")
