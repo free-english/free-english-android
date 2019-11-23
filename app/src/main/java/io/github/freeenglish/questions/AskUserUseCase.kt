@@ -29,7 +29,7 @@ class AskUserUseCaseImplementation(
     override suspend fun askQuestion(): Question {
         val word = questionsDao.getRandWord()
         var random = 0
-        if(word.definitions.size > 1) {
+        if (word.definitions.size > 1) {
             val randomValue = List(1) { Random.nextInt(0, word.definitions.size - 1) }
             random = randomValue[0]
         }
@@ -41,20 +41,28 @@ class AskUserUseCaseImplementation(
     override suspend fun userHasAnswered(
         rightDefinitionId: Long,
         isAnswerRight: Boolean
-    ){
+    ) {
         var definition = questionsDao.getDefinition(rightDefinitionId)
         val upatedDefinition = if (isAnswerRight) {
-            definition.copy(correctAnswerInTheRow = definition.correctAnswerInTheRow + 1)
+            definition.copy(
+                correctAnswerInTheRow = definition.correctAnswerInTheRow + 1,
+                progress = definition.progress + 10
+            )
+        } else {
+            definition.copy(
+                correctAnswerInTheRow = 0,
+                progress = definition.progress + 10
+            )
         }
-        else {
-            definition.copy(correctAnswerInTheRow = 0)
-        }
-         questionsDao.updateDefinition(upatedDefinition)
+        questionsDao.updateDefinition(upatedDefinition)
     }
 
 
-
-    fun generateQuestion(word: WordAndDefinitions, random: Int, defScope: List<Definition>): Question {
+    fun generateQuestion(
+        word: WordAndDefinitions,
+        random: Int,
+        defScope: List<Definition>
+    ): Question {
 
         val question = Question(
             id = word.definitions[random].id,
@@ -65,7 +73,7 @@ class AskUserUseCaseImplementation(
                 Answer(defScope[1].id, defScope[1].meaning),
                 Answer(defScope[2].id, defScope[2].meaning)
 
-            ).sortedBy {Random.nextInt(0, 10)},
+            ).sortedBy { Random.nextInt(0, 10) },
             correctAnswer = word.definitions[random]
         )
 
