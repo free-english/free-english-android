@@ -7,8 +7,8 @@ import io.github.freeenglish.data.entities.WordAndDefinitions
 
 @Dao
 interface QuestionsDao {
-    @Query("SELECT * FROM words ORDER BY RANDOM() LIMIT 1")
-    suspend fun getWordWithDefinitions(): WordAndDefinitions
+    @Query("SELECT * FROM words ORDER BY RANDOM() LIMIT :limit")
+    suspend fun getWordWithDefinitions(limit: Int): List<WordAndDefinitions>
 
     @Query("SELECT * FROM words WHERE priority > 0 AND priority < 100 LIMIT 7")
     suspend fun getPrioredWord(): List<WordAndDefinitions>
@@ -31,7 +31,11 @@ interface QuestionsDao {
     @Query("SELECT * FROM words WHERE id IN (:idsList)")
     suspend fun getWordWithDefinitions(idsList: List<Long>): List<Word>
 
+    @Query("SELECT * FROM words WHERE id <> :wordId ORDER BY RANDOM() LIMIT 3")
+    suspend fun getWordsExceptWithId(wordId: Long): List<Word>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWord(word: Word)
+
 
 }

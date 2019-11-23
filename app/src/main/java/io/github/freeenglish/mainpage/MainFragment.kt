@@ -35,11 +35,11 @@ class MainFragment : Fragment() {
             words_in_db.text = " / " + appDataBase.getAllDifinitionsCount().toString()
             user_vocabulary.text = appDataBase.getUserVocaburyCount().toString()
 
-            val appDataBase2 = AppDatabase.getInstance(context!!).questionsDao().getWordWithDefinitions()
-            day_word.text = appDataBase2.word.value
+            val words = AppDatabase.getInstance(context!!).questionsDao().getWordWithDefinitions(1)
+            day_word.text = words[0].word.value
 
 
-            example.text = appDataBase2.definitions[0].meaning + "\n" + appDataBase2.definitions[0].examples
+            example.text = words[0].definitions[0].meaning + "\n" + words[0].definitions[0].examples
 
         }
         startTestButton.setOnClickListener {

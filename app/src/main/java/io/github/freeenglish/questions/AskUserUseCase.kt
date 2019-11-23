@@ -38,7 +38,17 @@ class AskUserUseCaseImplementation(
     private val dataSyncDao: DataSyncDao
 ) : AskUserUseCase {
 
+
     override suspend fun askQuestionsList(): List<Question> {
+
+        return if (Random.nextBoolean()) {
+            questionAboutWordWithDefinitionAsAnswer()
+        } else {
+            questionAboutDefinitionsWithWordsAsAnswersList()
+        }
+    }
+
+    private suspend fun questionAboutWordWithDefinitionAsAnswer(): List<Question> {
         val resultList = mutableListOf<Question>()
         val allWordsAndDefinitions = mutableListOf<WordAndDefinitions>()
         val priored = questionsDao.getPrioredWord()
@@ -56,7 +66,6 @@ class AskUserUseCaseImplementation(
         }
         return resultList
     }
-
 
     override suspend fun userHasAnswered(
         rightDefinitionId: Long,
@@ -120,5 +129,39 @@ class AskUserUseCaseImplementation(
         }
         val definitionsScope = questionsDao.getScopeOfWrongDef(word.word.id)
         return generateQuestion(word, random, definitionsScope)
+    }
+
+    private suspend fun questionAboutDefinitionsWithWordsAsAnswersList(): List<Question> {
+        val randomWordWithDefinitions = questionsDao.getWordWithDefinitions(testImtesSize)
+        val rezList = mutableListOf<Question>()
+        randomWordWithDefinitions.forEach {
+            rezList.add(
+                questionAboutDefinitionsWithWordsAsAnswers(
+                    it
+                )
+            )
+        }
+        return rezList
+    }
+
+    private suspend fun questionAboutDefinitionsWithWordsAsAnswers(randomWordWithDefinitions: WordAndDefinitions): Question {
+        val randomDefinition = randomWordWithDefinitions.definitions.random()
+        val otherWords = questionsDao.getWordsExceptWithId(randomDefinition.wordId)
+        return Question(
+            id = randomDefinition.id,
+            wordId = randomWordWithDefinitions.word.id,
+            question = randomDefinition.meaning,
+            answers = otherWords.map { Answer(it.id, it.value) } + listOf(
+                Answer(
+                    randomWordWithDefinitions.word.id,
+                    randomWordWithDefinitions.word.value
+                )
+            ).sortedBy { Random.nextInt() },
+            correctAnswer = CorrectAnswer(
+                id = randomDefinition.wordId,
+                answer = randomWordWithDefinitions.word.value,
+                examples = randomDefinition.examples
+            )
+        )
     }
 }
