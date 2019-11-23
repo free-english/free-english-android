@@ -27,4 +27,7 @@ interface QuestionsDao {
     @Query("SELECT * FROM words WHERE id IN (:idsList)")
     suspend fun getWordWithDefinitions(idsList: List<Long>): List<Word>
 
+    @Query("SELECT * FROM words WHERE id <> :wordId ORDER BY RANDOM() LIMIT 3")
+    suspend fun getWordsExceptWithId(wordId: Long): List<Word>
+
 }

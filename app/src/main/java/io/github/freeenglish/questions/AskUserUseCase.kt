@@ -32,6 +32,14 @@ class AskUserUseCaseImplementation(
 ) : AskUserUseCase {
 
     override suspend fun askQuestion(): Question {
+        return if (Random.nextBoolean()) {
+            questionAboutWordWithDefinitionAsAnswer()
+        } else {
+            questionAboutDefinitionsWithWordsAsAnswers()
+        }
+    }
+
+    private suspend fun questionAboutWordWithDefinitionAsAnswer(): Question {
         val word = questionsDao.getRandWord()
         var random = 0
         if (word.definitions.size > 1) {
@@ -83,6 +91,27 @@ class AskUserUseCaseImplementation(
                 id = definition.id,
                 answer = definition.meaning,
                 examples = definition.examples
+            )
+        )
+    }
+
+    private suspend fun questionAboutDefinitionsWithWordsAsAnswers(): Question {
+        val randomWordWithDefinitions = questionsDao.getWordWithDefinitions()
+        val randomDefinition = randomWordWithDefinitions.definitions.random()
+        val otherWords = questionsDao.getWordsExceptWithId(randomDefinition.wordId)
+        return Question(
+            id = randomDefinition.id,
+            question = randomDefinition.meaning,
+            answers = otherWords.map { Answer(it.id, it.value) } + listOf(
+                Answer(
+                    randomWordWithDefinitions.word.id,
+                    randomWordWithDefinitions.word.value
+                )
+            ).sortedBy { Random.nextInt() },
+            correctAnswer = CorrectAnswer(
+                id = randomDefinition.wordId,
+                answer = randomWordWithDefinitions.word.value,
+                examples = randomDefinition.examples
             )
         )
     }
