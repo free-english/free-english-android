@@ -30,7 +30,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         lifecycleScope.launchWhenCreated {
             val appDataBase = AppDatabase.getInstance(context!!).statDao()
-            words_in_db.text = appDataBase.getAllDifinitionsCount().toString()
+            words_in_db.text = " / " + appDataBase.getAllDifinitionsCount().toString()
             user_vocabulary.text = appDataBase.getUserVocaburyCount().toString()
         }
         startTestButton.setOnClickListener {
