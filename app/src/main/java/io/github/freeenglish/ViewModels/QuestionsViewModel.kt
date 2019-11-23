@@ -9,22 +9,30 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
     private val _state: MutableLiveData<ScreenState> = MutableLiveData()
     val state: LiveData<ScreenState> get() = _state
 
-    private var currentState: ScreenState.QuestionState? = null
-
-
+    private var _currentState: ScreenState.QuestionState? = null
 
     init {
         viewModelScope.launch {
             val state = ScreenState.QuestionState(askUserUseCase.askQuestion())
             _state.value = state
-            currentState = state
+            _currentState = state
         }
     }
 
     fun onAnswerClick(answerPos: Int) {
         viewModelScope.launch {
-            if (currentState != null && currentState!!.question.answers.size > answerPos) {
-                _state.value = ScreenState.Result(askUserUseCase.checkAnswer(currentState!!.question.correctAnswerId == currentState!!.question.answers[answerPos].id))
+            if (_currentState != null && _currentState!!.question.answers.size > answerPos) {
+                val correctAnswer = _currentState!!.question.correctAnswer.id == _currentState!!.question.answers[answerPos].id
+                _state.value = if (correctAnswer) {
+                    ScreenState.CorrectAnswer
+                }
+                else {
+                    ScreenState.WrongAnswer(
+                        word = _currentState!!.question.question,
+                        meaning = _currentState!!.question.correctAnswer.meaning,
+                        examples = _currentState!!.question.correctAnswer.examples
+                    )
+                }
             }
         }
 
@@ -35,7 +43,7 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
         viewModelScope.launch {
             val state = ScreenState.QuestionState(askUserUseCase.askQuestion())
             _state.value = state
-            currentState = state
+            _currentState = state
 
         }
     }
@@ -44,11 +52,7 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 
 sealed class ScreenState() {
     data class QuestionState(val question: Question): ScreenState()
-
-    class Result(val isRight: Boolean): ScreenState(){
-
-    }
-
-
+    object CorrectAnswer: ScreenState()
+    data class WrongAnswer(val word: String, val meaning: String, val examples: String): ScreenState()
 }
 

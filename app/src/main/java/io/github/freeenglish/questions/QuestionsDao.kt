@@ -14,15 +14,6 @@ interface QuestionsDao {
     @Query("SELECT * FROM words ORDER BY RANDOM() LIMIT 1")
     suspend fun getRandWord(): WordAndDefinitions
 
-
     @Query("SELECT * FROM definitions WHERE id <> :descId  ORDER BY RANDOM() LIMIT 3")
     suspend fun getScopeOfWrongDef(descId: Long): List<Definition>
-
-    @Query("SELECT *  FROM definitions WHERE id <> :rightDefinitionId LIMIT 1")
-    suspend fun getDefinition(rightDefinitionId: Long): Definition
-
-    @Update
-    suspend fun updateDefinition(definitions: Definition)
-
-
 }

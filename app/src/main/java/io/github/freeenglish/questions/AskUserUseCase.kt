@@ -9,7 +9,7 @@ data class Question(
     val id: Long,
     val question: String,
     val answers: List<Answer>,
-    val correctAnswerId: Long
+    val correctAnswer: Definition
 )
 
 data class Answer(
@@ -72,12 +72,9 @@ class AskUserUseCaseImplementation(
                 Answer(defScope[2].id, defScope[2].meaning)
 
             ).sortedBy {Random.nextInt(0, 10)},
-            correctAnswerId = word.definitions[random].id
+            correctAnswer = word.definitions[random]
         )
 
         return question
-    }
-    override suspend fun checkAnswer(isAnswerRight: Boolean): Boolean {
-        return isAnswerRight
     }
 }
