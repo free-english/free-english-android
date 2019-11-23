@@ -24,7 +24,11 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
             if (_currentState != null && _currentState!!.question.answers.size > answerPos) {
                 val correctAnswer = _currentState!!.question.correctAnswer.id == _currentState!!.question.answers[answerPos].id
                 _state.value = if (correctAnswer) {
-                    ScreenState.CorrectAnswer
+                    ScreenState.CorrectAnswer(
+                        word = _currentState!!.question.question,
+                        meaning = _currentState!!.question.correctAnswer.meaning,
+                        examples = _currentState!!.question.correctAnswer.examples
+                    )
                 }
                 else {
                     ScreenState.WrongAnswer(
@@ -52,7 +56,7 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 
 sealed class ScreenState() {
     data class QuestionState(val question: Question): ScreenState()
-    object CorrectAnswer: ScreenState()
+    data class CorrectAnswer(val word: String, val meaning: String, val examples: String): ScreenState()
     data class WrongAnswer(val word: String, val meaning: String, val examples: String): ScreenState()
 }
 
