@@ -6,7 +6,7 @@ android:
     - build-tools-29.0.2
     - sys-img-x86-android-29
 before_script:
-  - export ANDROID_HOME=~/android-sdk
+  - export ANDROID_SDK_ROOT=~/android-sdk
   - echo no | android create avd --force -n test -t android-29 --abi x86 -c 100M
   - emulator -avd test -no-audio -no-window -memory 1500 -no-accel  &
   - android-wait-for-emulator
