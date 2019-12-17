@@ -31,7 +31,7 @@ android {
     }
 }
 
-def lifecycle_arch_version = '2.2.0-rc02'
+def lifecycle_arch_version = '2.2.0-rc03'
 def room_version = "2.2.2"
 def moshi_version = "1.9.2"
 def retrofit_version = "2.6.2"
@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:29.1.1'
     implementation 'com.android.support:design:29.1.1'
 
-    implementation "androidx.fragment:fragment-ktx:1.2.0-rc02"
+    implementation "androidx.fragment:fragment-ktx:1.2.0-rc03"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_arch_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_arch_version"
@@ -68,4 +68,11 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation "androidx.work:work-runtime-ktx:2.2.0"
+
+    // Unit tests
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:3.2.0"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
 }
