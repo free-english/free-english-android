@@ -1,7 +1,0 @@
-language: android
-dist: trusty
-android:
-  components:
-    - android-29
-    - build-tools-29.0.2
-script: ./gradlew build
