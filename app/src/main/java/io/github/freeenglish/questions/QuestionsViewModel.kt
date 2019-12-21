@@ -1,11 +1,9 @@
-package io.github.freeenglish.ViewModels
+package io.github.freeenglish.questions
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.freeenglish.questions.AskUserUseCase
-import io.github.freeenglish.questions.Question
 import kotlinx.coroutines.launch
 
 class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel() {
@@ -19,7 +17,8 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 
     init {
         viewModelScope.launch {
-            val state = ScreenState.QuestionState(askUserUseCase.askQuestion())
+            val state =
+                ScreenState.QuestionState(askUserUseCase.askQuestion())
             _state.value = state
             _currentState = state
         }
@@ -66,7 +65,8 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
                     totalAnswersCount = allAnswers
                 )
             } else {
-                val state = ScreenState.QuestionState(askUserUseCase.askQuestion())
+                val state =
+                    ScreenState.QuestionState(askUserUseCase.askQuestion())
                 _state.value = state
                 _currentState = state
             }

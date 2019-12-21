@@ -8,8 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import io.github.freeenglish.R
-import io.github.freeenglish.ViewModels.QuestionsViewModel
-import io.github.freeenglish.ViewModels.ScreenState
 import io.github.freeenglish.data.AppDatabase
 import io.github.freeenglish.utils.viewModels
 import kotlinx.android.synthetic.main.questions_fragment.*
@@ -24,7 +22,13 @@ class QuestionFragment : Fragment() {
     }
 
     private val viewModel: QuestionsViewModel by viewModels {
-        QuestionsViewModel(AskUserUseCaseImplementation(AppDatabase.getInstance(context!!).questionsDao()))
+        QuestionsViewModel(
+            AskUserUseCaseImplementation(
+                AppDatabase.getInstance(
+                    context!!
+                ).questionsDao()
+            )
+        )
     }
 
     override fun onCreateView(
