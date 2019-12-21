@@ -1,0 +1,7 @@
+task ciBuild() {
+    dependsOn "app:assembleDebug"
+}
+
+task ciUnitTests() {
+    dependsOn "app:testDebugUnitTest"
+}
