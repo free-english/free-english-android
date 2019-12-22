@@ -1,4 +1,5 @@
 package io.github.freeenglish.questions
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,8 +49,9 @@ class QuestionFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 is ScreenState.QuestionState -> updateQuestionState(it)
-                is ScreenState.CorrectAnswer -> showCorrectAnswer(it)
-                is ScreenState.WrongAnswer -> showWrongAnswer(it)
+                is ScreenState.AnswerResult -> {
+                    if (it.correct) showCorrectAnswer(it) else showWrongAnswer(it)
+                }
                 is ScreenState.TestIsFinished -> showResults(it)
             }
         }
@@ -67,13 +69,18 @@ class QuestionFragment : Fragment() {
         }
     }
 
-    private fun showCorrectAnswer(resultState: ScreenState.CorrectAnswer) {
+    private fun showCorrectAnswer(resultState: ScreenState.AnswerResult) {
         congrat.text = getString(R.string.congrats)
         congrat.setTextColor(ContextCompat.getColor(context!!, R.color.success))
         rightText.setTextColor(ContextCompat.getColor(context!!, R.color.success))
         nextButton.setTextColor(ContextCompat.getColor(context!!, R.color.success))
 
-        showAnswer(resultState.word, resultState.meaning, resultState.examples, resultState.countAll)
+        showAnswer(
+            resultState.word,
+            resultState.meaning,
+            resultState.examples,
+            resultState.countAll
+        )
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
                 context!!, // Context
@@ -82,13 +89,18 @@ class QuestionFragment : Fragment() {
         )
     }
 
-    private fun showWrongAnswer(resultState: ScreenState.WrongAnswer) {
+    private fun showWrongAnswer(resultState: ScreenState.AnswerResult) {
         congrat.text = getString(R.string.almost)
         congrat.setTextColor(ContextCompat.getColor(context!!, R.color.error))
         rightText.setTextColor(ContextCompat.getColor(context!!, R.color.error))
         nextButton.setTextColor(ContextCompat.getColor(context!!, R.color.error))
 
-        showAnswer(resultState.word, resultState.meaning, resultState.examples, resultState.countAll)
+        showAnswer(
+            resultState.word,
+            resultState.meaning,
+            resultState.examples,
+            resultState.countAll
+        )
         answer_right.setImageDrawable(
             ContextCompat.getDrawable(
                 context!!, // Context
@@ -106,7 +118,6 @@ class QuestionFragment : Fragment() {
 
         pb_test.progress = progressStatus
     }
-
 
 
     private fun updateQuestionState(state: ScreenState.QuestionState) {
@@ -130,7 +141,10 @@ class QuestionFragment : Fragment() {
             .beginTransaction()
             .replace(
                 R.id.container,
-                QuestionResultFragment.newInstance(testResult.correctAnswersCount, testResult.totalAnswersCount)
+                QuestionResultFragment.newInstance(
+                    testResult.correctAnswersCount,
+                    testResult.totalAnswersCount
+                )
             )
             .commit()
     }

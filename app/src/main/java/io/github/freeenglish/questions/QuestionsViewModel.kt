@@ -6,23 +6,24 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
+const val QUESTIONS_PER_TEST = 10
+
 class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel() {
     private val _state: MutableLiveData<ScreenState> = MutableLiveData()
     val state: LiveData<ScreenState> get() = _state
+
+    init {
+        viewModelScope.launch {
+            val state = ScreenState.QuestionState(askUserUseCase.askQuestion())
+            _state.value = state
+            _currentState = state
+        }
+    }
 
     private var _currentState: ScreenState.QuestionState? = null
 
     private var rightAnswers: Int = 0
     private var allAnswers: Int = 0
-
-    init {
-        viewModelScope.launch {
-            val state =
-                ScreenState.QuestionState(askUserUseCase.askQuestion())
-            _state.value = state
-            _currentState = state
-        }
-    }
 
     fun onAnswerClick(answerPos: Int) {
         viewModelScope.launch {
@@ -34,22 +35,16 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
                     _currentState!!.question.correctAnswer.id,
                     correctAnswer
                 )
+
+                _state.value = ScreenState.AnswerResult(
+                    word = _currentState!!.question.question,
+                    meaning = _currentState!!.question.correctAnswer.answer,
+                    examples = _currentState!!.question.correctAnswer.examples,
+                    countAll = allAnswers,
+                    correct = correctAnswer
+                )
                 if (correctAnswer) {
                     ++rightAnswers
-                    _state.value = ScreenState.CorrectAnswer(
-                        word = _currentState!!.question.question,
-                        meaning = _currentState!!.question.correctAnswer.answer,
-                        examples = _currentState!!.question.correctAnswer.examples,
-                        countAll = allAnswers
-                    )
-                } else {
-                    _state.value = ScreenState.WrongAnswer(
-                        word = _currentState!!.question.question,
-                        meaning = _currentState!!.question.correctAnswer.answer,
-                        examples = _currentState!!.question.correctAnswer.examples,
-                        countAll = allAnswers
-
-                    )
                 }
             }
         }
@@ -59,7 +54,7 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 
     fun onNextClick() {
         viewModelScope.launch {
-            if (allAnswers == 10) {
+            if (allAnswers == QUESTIONS_PER_TEST) {
                 _state.value = ScreenState.TestIsFinished(
                     correctAnswersCount = rightAnswers,
                     totalAnswersCount = allAnswers
@@ -75,20 +70,15 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 }
 
 
-sealed class ScreenState() {
+sealed class ScreenState {
     data class QuestionState(val question: Question) : ScreenState()
-    data class CorrectAnswer(
-        val word: String,
-        val meaning: String,
-        val examples: String,
-        val countAll: Int
-    ) : ScreenState()
 
-    data class WrongAnswer(
+    data class AnswerResult(
         val word: String,
         val meaning: String,
         val examples: String,
-        val countAll: Int
+        val countAll: Int,
+        val correct: Boolean
     ) : ScreenState()
 
     data class TestIsFinished(val correctAnswersCount: Int, val totalAnswersCount: Int) :
