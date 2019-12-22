@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-18.04
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v1
@@ -13,3 +13,7 @@ jobs:
       run: ./gradlew ciBuild
     - name: run unit tests
       run: ./gradlew ciUnitTests
+    - name: start emulator
+      run: ./start-emulator-macos-azure-build-agent.sh
+    - name: run instumentation tests
+      run: ./gradlew ciInstumentationTests

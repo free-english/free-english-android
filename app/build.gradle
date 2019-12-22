@@ -13,6 +13,7 @@ android {
         versionCode 2
         versionName "0.0.1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: 'true'
     }
     buildTypes {
         release {
@@ -29,6 +30,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        animationsDisabled true
+    }
 }
 
 def lifecycle_arch_version = '2.2.0-rc03'
@@ -36,6 +42,8 @@ def room_version = "2.2.2"
 def moshi_version = "1.9.2"
 def retrofit_version = "2.6.2"
 def coroutines_version = '1.3.2'
+def androidTestRunnerVersion = "1.2.0"
+def espressoVersion = "3.2.0"
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
@@ -75,4 +83,12 @@ dependencies {
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+
+    // Instrumentation tests
+    androidTestImplementation "androidx.test:runner:$androidTestRunnerVersion"
+    androidTestUtil "androidx.test:orchestrator:$androidTestRunnerVersion"
+    androidTestImplementation "androidx.test:rules:$androidTestRunnerVersion"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
 }
