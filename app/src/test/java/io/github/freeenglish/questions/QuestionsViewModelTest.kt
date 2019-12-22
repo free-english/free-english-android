@@ -12,6 +12,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.ArgumentMatchers.anyLong
+import org.mockito.internal.verification.Times
 
 private val testQuestion = Question(
     id = 99,
@@ -34,29 +35,39 @@ class QuestionsViewModelTest : BaseViewModelTest() {
     private lateinit var askUserCaseMock: AskUserUseCase
 
     @Before
-    fun setup() = runBlocking {
+    fun setup() = runBlocking<Unit> {
         askUserCaseMock = mock()
         whenever(askUserCaseMock.askQuestion()).thenReturn(testQuestion)
         questionsViewModel = QuestionsViewModel(askUserCaseMock)
+        whenever(askUserCaseMock.userHasAnswered(anyLong(), anyBoolean())).thenReturn(Unit)
     }
 
     @After
     fun finish() = runBlocking {
-        verify(askUserCaseMock).askQuestion()
         verifyNoMoreInteractions(askUserCaseMock)
     }
 
     @Test
     fun `should get question for initial state`() = runBlocking<Unit> {
         assertEquals(ScreenState.QuestionState(testQuestion), questionsViewModel.state.value)
+        verify(askUserCaseMock).askQuestion()
     }
 
     @Test
     fun `should handle correct answers`() = runBlocking<Unit> {
-        whenever(askUserCaseMock.askQuestion()).thenReturn(testQuestion)
-        whenever(askUserCaseMock.userHasAnswered(anyLong(), anyBoolean())).thenReturn(Unit)
         questionsViewModel.onAnswerClick(TEST_QUESTION_CORRECT_ANSWER_POSITION)
         assertEquals(rightAnswerForTheTestQuestion, questionsViewModel.state.value)
         verify(askUserCaseMock).userHasAnswered(77, true)
+        verify(askUserCaseMock).askQuestion()
+    }
+
+    @Test
+    fun `should go to the next question`() = runBlocking<Unit> {
+        questionsViewModel.onAnswerClick(TEST_QUESTION_CORRECT_ANSWER_POSITION)
+        questionsViewModel.onNextClick()
+
+        assertEquals(ScreenState.QuestionState(testQuestion), questionsViewModel.state.value)
+        verify(askUserCaseMock).userHasAnswered(anyLong(), anyBoolean())
+        verify(askUserCaseMock, Times(2)).askQuestion()
     }
 }
