@@ -1,0 +1,40 @@
+[
+  {
+    "value": "first",
+    "definitions": [
+      {
+        "meaning": "meaning 1",
+        "examples": [
+          "example 1 for meaning 1 of first",
+          "example 2 for meaning 1 of first"
+        ]
+      },
+      {
+        "meaning": "meaning 2",
+        "examples": [
+          "example 1 for meaning 2 of first",
+          "example 2 for meaning 2 of first"
+        ]
+      }
+    ]
+  },
+  {
+    "value": "second",
+    "definitions": [
+      {
+        "meaning": "meaning 1 of second",
+        "examples": [
+          "example 1 for meaning 1 of second",
+          "example 2 for meaning 1 of second"
+        ]
+      },
+      {
+        "meaning": "meaning 2 of second",
+        "examples": [
+          "example 1 for meaning 2 of second",
+          "example 2 for meaning 2 of second"
+        ]
+      }
+    ]
+  }
+]
