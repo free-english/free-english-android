@@ -5,3 +5,7 @@ task ciBuild() {
 task ciUnitTests() {
     dependsOn "app:testDebugUnitTest"
 }
+
+task ciInstumentationTests() {
+    dependsOn "app:connectedDebugAndroidTest"
+}

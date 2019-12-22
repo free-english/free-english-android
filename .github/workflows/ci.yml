@@ -13,3 +13,7 @@ jobs:
       run: ./gradlew ciBuild
     - name: run unit tests
       run: ./gradlew ciUnitTests
+    - name: start emulator
+      run: ./start-emulator-macos-azure-build-agent.sh
+    - name: run instumentation tests
+      run: ./gradlew ciInstumentationTests

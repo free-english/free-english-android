@@ -170,7 +170,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="nextButton,answer_right,llayout,congrat"
-        tools:visibility="gone" />
+        tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/congrat"
