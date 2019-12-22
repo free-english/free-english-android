@@ -20,6 +20,13 @@ private val testQuestion = Question(
     correctAnswer = CorrectAnswer(77, "yes", "yes, this is a test question")
 )
 private const val TEST_QUESTION_CORRECT_ANSWER_POSITION = 0
+private val rightAnswerForTheTestQuestion = ScreenState.AnswerResult(
+    "Is it a test question?",
+    "yes",
+    "yes, this is a test question",
+    1,
+    true
+)
 
 class QuestionsViewModelTest : BaseViewModelTest() {
 
@@ -49,14 +56,7 @@ class QuestionsViewModelTest : BaseViewModelTest() {
         whenever(askUserCaseMock.askQuestion()).thenReturn(testQuestion)
         whenever(askUserCaseMock.userHasAnswered(anyLong(), anyBoolean())).thenReturn(Unit)
         questionsViewModel.onAnswerClick(TEST_QUESTION_CORRECT_ANSWER_POSITION)
-        assertEquals(
-            ScreenState.CorrectAnswer(
-                "Is it a test question?",
-                "yes",
-                "yes, this is a test question",
-                1
-            ), questionsViewModel.state.value
-        )
+        assertEquals(rightAnswerForTheTestQuestion, questionsViewModel.state.value)
         verify(askUserCaseMock).userHasAnswered(77, true)
     }
 }
