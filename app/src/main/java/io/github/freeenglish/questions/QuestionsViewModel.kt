@@ -8,13 +8,14 @@ import kotlinx.coroutines.launch
 
 class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel() {
     private val _state: MutableLiveData<ScreenState> = MutableLiveData()
-    val state: LiveData<ScreenState> by lazy {
+    val state: LiveData<ScreenState> get() = _state
+
+    init {
         viewModelScope.launch {
             val state = ScreenState.QuestionState(askUserUseCase.askQuestion())
             _state.value = state
             _currentState = state
         }
-        _state
     }
 
     private var _currentState: ScreenState.QuestionState? = null
@@ -73,8 +74,9 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 }
 
 
-sealed class ScreenState() {
+sealed class ScreenState {
     data class QuestionState(val question: Question) : ScreenState()
+
     data class CorrectAnswer(
         val word: String,
         val meaning: String,
