@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
+const val QUESTIONS_PER_TEST = 10
+
 class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel() {
     private val _state: MutableLiveData<ScreenState> = MutableLiveData()
     val state: LiveData<ScreenState> get() = _state
@@ -52,7 +54,7 @@ class QuestionsViewModel(private val askUserUseCase: AskUserUseCase) : ViewModel
 
     fun onNextClick() {
         viewModelScope.launch {
-            if (allAnswers == 10) {
+            if (allAnswers == QUESTIONS_PER_TEST) {
                 _state.value = ScreenState.TestIsFinished(
                     correctAnswersCount = rightAnswers,
                     totalAnswersCount = allAnswers
